@@ -1,0 +1,51 @@
+<header class="th-header header-layout1">
+     
+  <div class="sticky-wrapper">
+    <div class="menu-area">
+      <div class="container th-container">
+        <div class="row align-items-center justify-content-between">
+          <div class="col-auto">
+            <div class="header-logo">
+              <a href="home-travel.html"
+                ><img src="static/img/logo.svg" alt="Tourm"
+              /></a>
+            </div>
+          </div>
+          <div class="col-auto me-xl-auto">
+            <nav class="main-menu d-none d-xl-inline-block">
+              <ul>
+                <li class="menu-item-has">
+                  <a class="active"  href="{{ url_for('main.index') }}">Home</a>
+                  
+                </li>
+                <li>
+                  <a href="{{ url_for('main.about') }}">About Us</a>
+                </li>
+                <li class="menu-item-has">
+                  <a href="{{ url_for('main.destination') }}">Destination</a>
+                </li>
+                <li>
+                  <a href="{{ url_for('main.contact') }}">Contact us</a>
+                </li>
+              </ul>
+            </nav>
+            <button type="button" class="th-menu-toggle d-block d-xl-none">
+              <i class="far fa-bars"></i>
+            </button>
+          </div>
+          <div class="col-auto d-none d-xl-block">
+            <div class="header-button">
+              <a href="{{ url_for('main.contact') }}" class="th-btn style3 th-icon"
+                >Book Now</a
+              >
+            </div>
+          </div>
+        </div>
+      </div>
+      <div
+        class="logo-bg"
+        data-mask-src="static/img/logo_bg_mask.png"
+      ></div>
+    </div>
+  </div>
+</header>
