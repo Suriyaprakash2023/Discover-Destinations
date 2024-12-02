@@ -1,0 +1,322 @@
+{% extends 'dashboard/dashboard_base.html' %}
+
+{% block content %}
+
+
+
+
+  <div class="dashboard__content_content">
+
+    <h1 class="text-30">Add Tour</h1>
+   
+
+    <div class="rounded-12 bg-white shadow-2 px-40 pt-40 pb-30 mt-60">
+      <div class="tabs -underline-2 js-tabs">
+        <div class="tabs__controls row x-gap-40 y-gap-10 lg:x-gap-20 js-tabs-controls">
+
+          <div class="col-auto">
+            <button class="tabs__button text-20 lh-12 fw-500 pb-15 lg:pb-0 js-tabs-button is-tab-el-active" data-tab-target=".-tab-item-1">Create a New Destination</button>
+          </div>
+
+        </div>
+        <form action='/addtour' method='POST' >
+          <div class="row pt-40">
+            <div class="col-12">
+              <div class="tabs__content js-tabs-content">
+                <div class="tabs__pane -tab-item-1 is-tab-el-active">
+                  <div class="contactForm row y-gap-30">
+                    <div class="col-12">
+
+                      <div class="form-input ">
+                        <input type="text" name='title' required>
+                        <label class="lh-1 text-16 text-light-1">Tour Title</label>
+                      </div>
+
+                    </div>
+                    <div class="col-12">
+
+                      <div class="form-input ">
+                        <input type="text" name='category' required>
+                        <label class="lh-1 text-16 text-light-1">Category</label>
+                      </div>
+
+                    </div>
+                    
+                    <div class="col-12">
+                      <label class="lh-1 text-16 ">Destination Image</label>
+                      <div class="form-input ">
+                        <input type="file" class='form-control' name='main_image' required>
+                        
+                      </div>
+
+                    </div>
+                    <div class="col-12">
+
+                      <div class="form-input ">
+                        <input type="text" name='rating' required>
+                        <label class="lh-1 text-16 text-light-1">Rating</label>
+                      </div>
+
+                    </div>
+
+                    <div class="col-12">
+
+                      <div class="form-input ">
+                        <textarea required  name='description' rows="8"></textarea>
+                        <label class="lh-1 text-16 text-light-1">Description</label>
+                      </div>
+
+                    </div>
+
+                    <div class="col-12">
+                      <h4 class="text-18 fw-500 mb-20">Gallery</h4>
+                  
+                      <div class="row x-gap-20 y-gap">
+                          <!-- Upload area -->
+                          <div class="col-auto">
+                              <div class="size-200 rounded-12 border-dash-1 bg-accent-1-05 flex-center flex-column" id="uploadArea">
+                                <svg width="40" height="40" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                  <path fill-rule="evenodd" clip-rule="evenodd" d="M11.6663 12.9167C10.5157 12.9167 9.58301 13.8494 9.58301 15C9.58301 16.1506 10.5157 17.0834 11.6663 17.0834C12.8169 17.0834 13.7497 16.1506 13.7497 15C13.7497 13.8494 12.8169 12.9167 11.6663 12.9167ZM7.08301 15C7.08301 12.4687 9.13504 10.4167 11.6663 10.4167C14.1976 10.4167 16.2497 12.4687 16.2497 15C16.2497 17.5314 14.1976 19.5834 11.6663 19.5834C9.13504 19.5834 7.08301 17.5314 7.08301 15Z" fill="#EB662B" />
+                                  <path fill-rule="evenodd" clip-rule="evenodd" d="M16.9093 26.0079C14.8264 28.3404 12.654 31.5307 10.3572 35.613C10.0187 36.2147 9.25653 36.428 8.65487 36.0895C8.0532 35.7509 7.83988 34.9889 8.17838 34.3872C10.5233 30.2194 12.7967 26.8597 15.0446 24.3427C17.2867 21.8319 19.5642 20.0907 21.9317 19.2709C24.3447 18.4352 26.754 18.5917 29.1295 19.699C31.4633 20.7869 33.7245 22.7714 35.9702 25.5269C36.4062 26.062 36.326 26.8495 35.7908 27.2855C35.2557 27.7217 34.4683 27.6414 34.0322 27.1062C31.9112 24.5035 29.9327 22.8317 28.0733 21.9649C26.2557 21.1177 24.518 21.0209 22.7498 21.6332C20.936 22.2614 18.9978 23.6692 16.9093 26.0079Z" fill="#EB662B" />
+                                  <path fill-rule="evenodd" clip-rule="evenodd" d="M2.73524 6.06863C4.21994 4.58393 6.23359 3.75 8.33317 3.75H20.4665C21.1568 3.75 21.7165 4.30965 21.7165 5C21.7165 5.69035 21.1568 6.25 20.4665 6.25H8.33317C6.89654 6.25 5.51879 6.82062 4.503 7.8364C3.4872 8.8522 2.9165 10.23 2.9165 11.6667V28.3333C2.9165 29.7698 3.48717 31.1475 4.503 32.1633C5.51885 33.1793 6.89662 33.75 8.33317 33.75H28.3332C29.7697 33.75 31.1475 33.1793 32.1633 32.1633C33.1792 31.1475 33.7498 29.7698 33.7498 28.3333V20C33.7498 19.3097 34.3095 18.75 34.9998 18.75C35.6902 18.75 36.2498 19.3097 36.2498 20V28.3333C36.2498 30.433 35.4158 32.4465 33.9312 33.9312C32.4465 35.4158 30.4328 36.25 28.3332 36.25H8.33317C6.23349 36.25 4.21987 35.4158 2.73524 33.9312C1.25059 32.4465 0.416504 30.433 0.416504 28.3333V11.6667C0.416504 9.56707 1.25056 7.55332 2.73524 6.06863Z" fill="#EB662B" />
+                                  <path fill-rule="evenodd" clip-rule="evenodd" d="M31.25 0.13327C31.9403 0.13327 32.5 0.692913 32.5 1.38327V14.7166C32.5 15.407 31.9403 15.9666 31.25 15.9666C30.5597 15.9666 30 15.407 30 14.7166V1.38327C30 0.692913 30.5597 0.13327 31.25 0.13327Z" fill="#EB662B" />
+                                  <path fill-rule="evenodd" clip-rule="evenodd" d="M30.3674 0.499385C30.8556 0.011232 31.6469 0.011232 32.1351 0.499385L37.4684 5.83273C37.9566 6.32088 37.9566 7.11233 37.4684 7.60049C36.9803 8.08864 36.1889 8.08864 35.7008 7.60049L31.2513 3.15103L26.8018 7.60049C26.3136 8.08864 25.5221 8.08864 25.0341 7.60049C24.5459 7.11233 24.5459 6.32088 25.0341 5.83273L30.3674 0.499385Z" fill="#EB662B" />
+                                </svg>
+                  
+                                  <div class="text-16 fw-500 text-accent-1 mt-10">Upload Images</div>
+                                  <input type="file" id="imageUpload" name='images' accept="image/*" class="mt-10" onchange="previewImages(event)" multiple style="display:none;">
+
+                                </div>
+
+
+                                <!-- Hidden inputs for image data -->
+                                <input type="hidden" name="image1" id="image1">
+                                <input type="hidden" name="image2" id="image2">
+                                <input type="hidden" name="image3" id="image3">
+                                <input type="hidden" name="image4" id="image4">
+                                <div class="text-14 mt-20">PNG or JPG no bigger than 800px wide and tall.</div>
+                          </div>
+                  
+                          <!-- Image previews will be shown here -->
+                          <div class="col-12 mt-3" id="imagePreviewArea" style="display: flex; flex-wrap: wrap; gap: 10px;">
+                              <!-- Uploaded images will appear side by side here -->
+                          </div>
+                      </div>
+                  </div>
+                  
+
+                  <div class="contactForm row y-gap-30">
+                    
+                    <div class="col-12">
+
+                      <div class="form-input ">
+                        <input type="text"  name='price' required>
+                        <label class="lh-1 text-16 text-light-1">₹ Price</label>
+                      </div>
+
+                    </div>
+                    <div class="col-12">
+
+                      <div class="form-input ">
+                        <input type="text" name='destination_place' required>
+                        <label class="lh-1 text-16 text-light-1">Destination</label>
+                      </div>
+
+                    </div>
+              
+
+                    <div class="col-lg-6">
+                      <label class="lh-1 text-16 ">Currency Used</label>
+                      <div class="form-input ">
+                        
+                        <select name="currency" required>
+                          <option value='Eure'>Eure</option>
+                          <option value='Doller'>Doller</option>
+                          <option value='Rupee'>Rupee</option>
+                        </select>
+                        
+                      </div>
+
+                    </div>
+                    <div class="col-lg-6">
+                      <label class="lh-1 text-16 ">Language</label>
+                      <div class="form-input ">
+                        
+                        <select  name="language" required>
+                          <option value='English'>English</option>
+                          <option value='Doller'>Doller</option>
+                          <option value='Rupee'>Rupee</option>
+                        </select>
+                        
+                      </div>
+
+                    </div>
+                    <div class="col-12">
+
+                      <div class="form-input ">
+                        <input type="text" name='sub_title' required>
+                        <label class="lh-1 text-16 text-light-1">Sub Title</label>
+                      </div>
+
+                    </div>
+
+                    <div class="col-12">
+
+                      <div class="form-input ">
+                        <textarea required  name='sub_description' rows="4"></textarea>
+                        <label class="lh-1 text-16 text-light-1">Sub Description</label>
+                      </div>
+
+                    </div>
+
+                    <div class="col-12">
+                      <label class="lh-1 text-16 ">Sub Image</label>
+                      <div class="form-input ">
+                        <input type="file" class='form-control' name='sub_image' required>
+                       
+                      </div>
+
+                    </div>
+
+                   
+                  </div>
+                  
+                </div>
+
+
+
+
+                  <div class="col-12 mt-5">
+                    <button type='submit' class="button -md -dark-1 bg-accent-1 text-white">
+                      Save Changes
+                      <i class="icon-arrow-top-right text-16 ml-10"></i>
+                    </button>
+                  </div>
+
+                    
+                  </div>
+                </div>
+
+              
+            </div>
+          
+          </div>
+        </form>
+        </div>
+      
+      </div>
+    </div>
+
+    <div class="text-center pt-30">
+      © Copyright Viatours 2023
+    </div>
+
+  </div>
+</div>
+
+
+ <!-- JavaScript -->
+
+ <script>
+  // Trigger file input on clicking anywhere within the upload area
+  document.getElementById('uploadArea').addEventListener('click', function() {
+      document.getElementById('imageUpload').click();
+  });
+
+  // Keep track of the number of uploaded images
+  let uploadedImagesCount = 0;
+
+  function previewImages(event) {
+      const files = event.target.files;
+      const imagePreviewArea = document.getElementById('imagePreviewArea');
+      
+      // Reset the preview area if any new files are selected
+      imagePreviewArea.innerHTML = '';
+      uploadedImagesCount = 0;
+
+      if (files.length > 0) {
+          // Loop through each selected file
+          for (let i = 0; i < files.length; i++) {
+              if (uploadedImagesCount < 4) { // Ensure maximum 4 images
+                  const file = files[i];
+                  const reader = new FileReader();
+                  
+                  reader.onload = function(e) {
+                      const imagePreviewDiv = document.createElement('div');
+                      imagePreviewDiv.classList.add('relative');
+                      imagePreviewDiv.style.width = '200px'; // Set the width of each image preview
+                      imagePreviewDiv.style.height = '200px'; // Set the height of each image preview
+                      imagePreviewDiv.style.position = 'relative'; // Positioning for the delete button
+                      
+                      const imgElement = document.createElement('img');
+                      imgElement.src = e.target.result;
+                      imgElement.alt = 'image';
+                      imgElement.classList.add('size-200', 'rounded-12', 'object-cover');
+                      imgElement.style.width = '100%'; // Make the image fill the div
+                      imgElement.style.height = '100%'; // Make the image fill the div
+                      
+                      const deleteButton = document.createElement('button');
+                      deleteButton.classList.add('absoluteIcon1', 'button', '-dark-1');
+                      deleteButton.innerHTML = '<i class="icon-delete text-18"></i>';
+                      
+                      // Add event listener to delete the image
+                      deleteButton.onclick = function() {
+                          imagePreviewDiv.remove();
+                          uploadedImagesCount--; // Decrement the uploaded count
+                          updateHiddenInputs(); // Update hidden inputs after deletion
+                      };
+                      
+                      imagePreviewDiv.appendChild(imgElement);
+                      imagePreviewDiv.appendChild(deleteButton);
+                      
+                      imagePreviewArea.appendChild(imagePreviewDiv);
+
+                      uploadedImagesCount++; // Increment the uploaded count
+
+                      // Store image data in the corresponding hidden input field
+                      updateHiddenInputs();
+                  };
+                  
+                  reader.readAsDataURL(file);
+              } else {
+                  alert('You can upload a maximum of 4 images.');
+                  break;
+              }
+          }
+      }
+  }
+
+  // Update the hidden inputs with the uploaded images
+  function updateHiddenInputs() {
+      const hiddenInputs = [document.getElementById('image1'), document.getElementById('image2'), document.getElementById('image3'), document.getElementById('image4')];
+      const images = document.querySelectorAll('#imagePreviewArea img');
+
+      for (let i = 0; i < 4; i++) {
+          if (i < images.length) {
+              hiddenInputs[i].value = images[i].src; // Set the hidden input value to the image data
+          } else {
+              hiddenInputs[i].value = ''; // Clear the hidden input if no image
+          }
+      }
+  }
+
+  // Prevent form submission if less than 1 image is uploaded
+  document.getElementById('imageForm').addEventListener('submit', function(e) {
+      if (uploadedImagesCount < 1) {
+          alert('Please upload at least one image.');
+          e.preventDefault(); // Prevent form submission
+      }
+  });
+</script>
+
+
+
+
+ <script src="static/dashboard/js/chart.min.js" integrity="sha512-QSkVNOCYLtj73J4hbmVoOV6KVZuMluZlioC+trLpewV8qMjsWqlIQvkn1KGX2StWvPMdWGBqim1xlC8krl1EKQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+ <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAAz77U5XQuEME6TpftaMdX0bBelQxXRlM"></script>
+ <script src="static/dashboard/js/index.min.js"></script>
+ <script src="static/dashboard/js/vendors.js"></script>
+ <script src="static/dashboard/js/main.js"></script>
+
+ 
+{% endblock content %}

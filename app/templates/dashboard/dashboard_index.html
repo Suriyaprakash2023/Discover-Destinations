@@ -1,0 +1,227 @@
+{% extends 'dashboard/dashboard_base.html' %}
+
+{% block content %}
+
+
+
+<div class="dashboard__content_content">
+
+  
+  <div class="row y-gap-30 pt-5 md:pt-10">
+
+    <div class="col-xl-3 col-sm-6">
+      <div class="rounded-12 bg-white shadow-2 px-30 py-30 h-full">
+        <div class="row y-gap-20 items-center justify-between">
+          <div class="col-auto">
+            <div>Total Earnings</div>
+            <div class="text-30 fw-700">₹10,800</div>
+
+            <div>
+              <span class="text-accent-1">₹50</span> Today
+            </div>
+          </div>
+
+          <div class="col-auto">
+            <div class="size-80 flex-center bg-accent-1-05 rounded-full">
+              <i class="icon-wallet text-30 text-accent-1"></i>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-xl-3 col-sm-6">
+      <div class="rounded-12 bg-white shadow-2 px-30 py-30 h-full">
+        <div class="row y-gap-20 items-center justify-between">
+          <div class="col-auto">
+            <div>Total Pending</div>
+            <div class="text-30 fw-700">₹12,800</div>
+
+            <div>
+              <span class="text-accent-1">40+</span> Today
+            </div>
+          </div>
+
+          <div class="col-auto">
+            <div class="size-80 flex-center bg-accent-1-05 rounded-full">
+              <i class="icon-payment text-30 text-accent-1"></i>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-xl-3 col-sm-6">
+      <div class="rounded-12 bg-white shadow-2 px-30 py-30 h-full">
+        <div class="row y-gap-20 items-center justify-between">
+          <div class="col-auto">
+            <div>Total Booking</div>
+            <div class="text-30 fw-700">₹54,800</div>
+
+            <div>
+              <span class="text-accent-1">90+</span> Today
+            </div>
+          </div>
+
+          <div class="col-auto">
+            <div class="size-80 flex-center bg-accent-1-05 rounded-full">
+              <i class="icon-booking text-30 text-accent-1"></i>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-xl-3 col-sm-6">
+      <div class="rounded-12 bg-white shadow-2 px-30 py-30 h-full">
+        <div class="row y-gap-20 items-center justify-between">
+          <div class="col-auto">
+            <div>Wishlist</div>
+            <div class="text-30 fw-700">1834</div>
+
+            <div>
+              <span class="text-accent-1">290+</span> New Instructors
+            </div>
+          </div>
+
+          <div class="col-auto">
+            <div class="size-80 flex-center bg-accent-1-05 rounded-full">
+              <i class="icon-heart text-30 text-accent-1"></i>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <div class="row pt-30 y-gap-30">
+    <div class="col-xl-8 col-lg-12 col-md-6">
+      <div class="rounded-12 bg-white shadow-2 h-full">
+        <div class="pt-20 px-30">
+          <div class="tabs -underline-2 js-tabs">
+            <div class="d-flex items-center justify-between">
+              <div class="text-18 fw-500">Earning Statistics</div>
+
+              
+            </div>
+
+            <div class="tabs__content pt-30 js-tabs-content">
+
+              <div class="tabs__pane -tab-item-1 is-tab-el-active">
+                <canvas id="lineChart"></canvas>
+              </div>
+
+              <div class="tabs__pane -tab-item-2 ">
+                <canvas id="lineChart"></canvas>
+              </div>
+
+              <div class="tabs__pane -tab-item-3 ">
+                <canvas id="lineChart"></canvas>
+              </div>
+
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-xl-4 col-lg-12 col-md-6">
+      <div class="px-30 py-25 rounded-12 bg-white shadow-2">
+        <div class="d-flex items-center justify-between">
+          <div class="text-18 fw-500">Recent Activities</div>
+        </div>
+
+        <div class="row y-gap-30 pt-30">
+
+          <div class="col-12">
+            <div class="d-flex items-center">
+              <div class="flex-center size-40 bg-accent-1-05 rounded-full">
+                <i class="icon-home text-16"></i>
+              </div>
+
+              <div class="lh-14 ml-10">
+                Your listing House on the beverly hills has been approved
+              </div>
+            </div>
+          </div>
+
+          <div class="col-12">
+            <div class="d-flex items-center">
+              <div class="flex-center size-40 bg-accent-1-05 rounded-full">
+                <i class="icon-review text-16"></i>
+              </div>
+
+              <div class="lh-14 ml-10">
+                Dollie Horton left a review on House on the Northridge
+              </div>
+            </div>
+          </div>
+
+          <div class="col-12">
+            <div class="d-flex items-center">
+              <div class="flex-center size-40 bg-accent-1-05 rounded-full">
+                <i class="icon-heart text-16"></i>
+              </div>
+
+              <div class="lh-14 ml-10">
+                Someone favorites your Triple Story House for Rent listing
+              </div>
+            </div>
+          </div>
+
+          <div class="col-12">
+            <div class="d-flex items-center">
+              <div class="flex-center size-40 bg-accent-1-05 rounded-full">
+                <i class="icon-heart text-16"></i>
+              </div>
+
+              <div class="lh-14 ml-10">
+                Someone favorites your Triple Story House for Rent listing
+              </div>
+            </div>
+          </div>
+
+          <div class="col-12">
+            <div class="d-flex items-center">
+              <div class="flex-center size-40 bg-accent-1-05 rounded-full">
+                <i class="icon-home text-16"></i>
+              </div>
+
+              <div class="lh-14 ml-10">
+                Your listing House on the beverly hills has been approved
+              </div>
+            </div>
+          </div>
+
+          <div class="col-12">
+            <div class="d-flex items-center">
+              <div class="flex-center size-40 bg-accent-1-05 rounded-full">
+                <i class="icon-review text-16"></i>
+              </div>
+
+              <div class="lh-14 ml-10">
+                Dollie Horton left a review on House on the Northridge
+              </div>
+            </div>
+          </div>
+
+        </div>
+
+        <div class="pt-40">
+          <button class="button -md -outline-accent-1 col-12 text-accent-1">
+            View More
+            <i class="icon-arrow-top-right text-16 ml-10"></i>
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="text-center pt-30">
+    © Copyright Viatours 2023
+  </div>
+
+</div>
+
+{% endblock content %}

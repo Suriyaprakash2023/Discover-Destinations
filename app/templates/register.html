@@ -1,0 +1,43 @@
+{% extends 'base.html' %} {% block content %}
+
+<div class="container">
+  <div class="row  justify-content-center mt-5">
+    <div class="col-xl-6 ">
+<div class="tab-pane fade active show "id="pills-profile"role="tabpanel"aria-labelledby="pills-profile-tab">
+  <h3 class="th-form-title mb-30">Register your account</h3>
+  <form id="register-form" class="login-form" method='POST' action='/register'>
+    <div class="row">
+      <div class="form-group col-12">
+        <label>Username*</label>
+        <input
+          type="text"
+          class="form-control"
+          name="username"
+          id="username"
+          required
+        />
+      </div>
+      <div class="form-group col-12">
+        <label for="mobile_number">Mobile Number</label>
+        <input type="text" class="form-control" name="mobile_number" required />
+      </div>
+      <div class="form-group col-12">
+        <label for="email">Email*</label>
+        <input type="email" class="form-control" name="email" required />
+      </div>
+      <div class="form-group col-12">
+        <label for="password">Password*</label>
+        <input type="password" class="form-control" name="password" required />
+      </div>
+      <div class="form-btn mt-20 col-12">
+        <button type="submit" class="th-btn btn-fw th-radius2">Sign up</button>
+      </div>
+    </div>
+    <p class="form-messages mb-0 mt-3"></p>
+  </form>
+</div>
+</div>
+</div>
+</div>
+
+{% endblock content %}
