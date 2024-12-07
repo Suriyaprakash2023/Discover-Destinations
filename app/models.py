@@ -43,17 +43,17 @@ class Group(db.Model):
 class Destination(db.Model):
     __tablename__ = 'destination'
     id = db.Column(db.Integer, primary_key=True)
-    title = db.Column(db.String(80), unique=True, nullable=False)
+    title = db.Column(db.String(80),  nullable=False)
     main_image = db.Column(db.String(255), nullable=False)
-    category = db.Column(db.String(80), unique=True, nullable=False)
-    price = db.Column(db.String(80), unique=True, nullable=False)
-    rating = db.Column(db.String(120), unique=True, nullable=False)
+    category = db.Column(db.String(80),nullable=False)
+    price = db.Column(db.String(80), nullable=False)
+    rating = db.Column(db.String(120),  nullable=False)
     description = db.Column(db.String(500), nullable=False)
-    destination = db.Column(db.String(80), unique=True, nullable=False)
-    language = db.Column(db.String(80), unique=True, nullable=False)
-    currency_type = db.Column(db.String(80), unique=True, nullable=False)
-    sub_title = db.Column(db.String(80), unique=True, nullable=False)
-    sub_description = db.Column(db.String(300), unique=True, nullable=False)
+    destination = db.Column(db.String(80),  nullable=False)
+    language = db.Column(db.String(80), nullable=False)
+    currency_type = db.Column(db.String(80), nullable=False)
+    sub_title = db.Column(db.String(80),  nullable=False)
+    sub_description = db.Column(db.String(300), nullable=False)
     sub_image = db.Column(db.String(255), nullable=False)
 
     # Adding the relationship for Galleries associated with this Destination

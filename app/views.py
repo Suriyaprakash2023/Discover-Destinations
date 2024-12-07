@@ -2,6 +2,7 @@ from flask import Blueprint, render_template,jsonify, request, redirect, url_for
 from .models import *
 from werkzeug.security import generate_password_hash
 from flask_restful import Resource, Api
+from flask_login import LoginManager, login_user, logout_user, login_required, current_user
 
 main = Blueprint('main', __name__)
 
@@ -26,14 +27,15 @@ def contact():
     return render_template('contact.html')
 
 
-@main.route('/register', methods=['POST','GET'])
+@main.route('/register', methods=['GET',"POST"])
 def register():
+    print(request.data,"data")
     if request.method == 'POST':
         print(request.data)
-        username = request.json.get('username')
-        email = request.json.get('email')
-        mobile_number = request.json.get('mobile_number')
-        password = request.json.get('password')
+        username = request.form.get('username')
+        email = request.form.get('email')
+        mobile_number = request.form.get('mobile_number')
+        password = request.form.get('password')
 
         # Check for existing user
         user_exists = User.query.filter((User.username == username) | (User.email == email)).first()
@@ -43,10 +45,12 @@ def register():
         # Hash the password before saving
         hashed_password = generate_password_hash(password)
 
+        user_group = Group.query.filter_by(name="user").first()
+        print(user_group,"user_group")
         # Create and save new user
         new_user = User(username=username, email=email, password=hashed_password)
         new_user.mobile_number = mobile_number
-        new_user.groups = 'user'
+        new_user.groups.append(user_group)
         db.session.add(new_user)
         db.session.commit()
         # Respond with success message
@@ -61,22 +65,24 @@ def login():
 
         # Query for the user by email
         user = User.query.filter_by(mobile_number=mobile_number).first()
-
+        
         if user and user.check_password(password):
             print(user.groups,"user.groups")
             if any(group.name == 'admin' for group in user.groups):
+                login_user(user)  # Log in the user
                 session['user_id'] = user.id  # Store the user's ID in the session (indicating they are logged in)
                 flash('Login successful!', 'success')
-
+                print("admin")
                 return redirect(url_for('main.dashboard'))  # Redirect to a protected page (e.g., dashboard)
             else :
+                login_user(user)  # Log in the user
                 session['user_id'] = user.id  # Store the user's ID in the session (indicating they are logged in)
                 flash('Login successful!', 'success')
                 print('user')
                 return redirect(url_for('main.index'))
         else:
             flash('Invalid email or password', 'danger')
-
+            return redirect(url_for('main.register'))
     return render_template('login.html')
 
 @main.route('/dashboard')
@@ -97,6 +103,7 @@ def listing():
 
     return render_template('dashboard/listing.html')
 
+
 @main.route('/addtour',methods=['POST','GET'])
 def addtour():
     if request.method == 'POST':
@@ -113,7 +120,7 @@ def addtour():
         sub_description = request.form.get('sub_description') 
         sub_image = request.form.get('sub_image') 
 
-        print(language,"language")
+        print(main_image,sub_image,"language")
         create_destination = Destination(
             title=title,
             main_image=main_image,
@@ -130,14 +137,14 @@ def addtour():
         )
 
         # Add the destination to the session and commit
-        # db.session.add(create_destination)
-        # db.session.commit()
+        db.session.add(create_destination)
+        db.session.commit()
 
         image1 = request.form.get('image1') 
         image2 = request.form.get('image2') 
         image3 = request.form.get('image3') 
         image4 = request.form.get('image4') 
-        print(image1,image2,image3,image4 )
+        print(destination,"destination",destination.id)
         # Create a gallery and associate it with the destination
         gallery = Gallery(
             destination_id=destination.id,  # Associate with the created destination
