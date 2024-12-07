@@ -9,6 +9,29 @@
   <h3 class="th-form-title mb-30">Register your account</h3>
   <form id="register-form" method="post" action="/register" >
     <div class="row">
+
+      
+      {% with messages = get_flashed_messages(with_categories=True) %}
+      {% if messages %}
+        <div id="flash-messages">
+          {% for category, message in messages %}
+            {% if category == 'success' %}
+              <div class="alert alert-success" style="color: #fff;background-color: #05a35c;" role="alert">
+                Your Account Successfully Created Please Login..! 
+              </div>
+            {% elif category == 'error' %}
+                <div class="alert alert-danger" style="color: #fff;background-color: #ff1919c9;" role="alert">
+                  Please Check Your Mobile No & Password..!
+                </div>
+              
+            {% endif %}
+          {% endfor %}
+        </div>
+      {% endif %}
+    {% endwith %}
+
+
+
       <div class="form-group col-12">
         <label>Username*</label>
         <input

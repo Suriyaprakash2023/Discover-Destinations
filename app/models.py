@@ -1,5 +1,6 @@
 from flask_sqlalchemy import SQLAlchemy
 from flask_bcrypt import Bcrypt
+from werkzeug.security import check_password_hash
 
 db = SQLAlchemy()
 bcrypt = Bcrypt()
@@ -24,12 +25,29 @@ class User(db.Model):
         self.username = username
         self.email = email
         self.password_hash = bcrypt.generate_password_hash(password).decode('utf-8')
-
+      
     def check_password(self, password):
         return bcrypt.check_password_hash(self.password_hash, password)
+    # Flask-Login required properties
+    @property
+    def is_active(self):
+        # Assuming all users are active; modify if you have an `active` column
+        return True
+
+    @property
+    def is_authenticated(self):
+        return True
+
+    @property
+    def is_anonymous(self):
+        return False
+
+    def get_id(self):
+        return str(self.id)
 
     def __repr__(self):
         return f'<User {self.username}>'
+    
 
 class Group(db.Model):
     __tablename__ = 'group'

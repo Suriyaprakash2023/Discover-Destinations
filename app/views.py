@@ -1,4 +1,4 @@
-from flask import Blueprint, render_template,jsonify, request, redirect, url_for, flash, session
+from flask import Blueprint, render_template,jsonify, request, redirect, url_for, flash, session,current_app
 from .models import *
 from werkzeug.security import generate_password_hash
 from flask_restful import Resource, Api
@@ -31,29 +31,30 @@ def contact():
 def register():
     print(request.data,"data")
     if request.method == 'POST':
-        print(request.data)
+        
         username = request.form.get('username')
         email = request.form.get('email')
         mobile_number = request.form.get('mobile_number')
         password = request.form.get('password')
-
         # Check for existing user
         user_exists = User.query.filter((User.username == username) | (User.email == email)).first()
         if user_exists:
-            return render_template('register.html')
+            flash('UserName Or Email Already Registered..!', 'error')
+            return redirect(url_for('main.register')) 
 
         # Hash the password before saving
-        hashed_password = generate_password_hash(password)
+        # hashed_password = generate_password_hash(password)
 
         user_group = Group.query.filter_by(name="user").first()
         print(user_group,"user_group")
         # Create and save new user
-        new_user = User(username=username, email=email, password=hashed_password)
+        new_user = User(username=username, email=email, password=password)
         new_user.mobile_number = mobile_number
         new_user.groups.append(user_group)
         db.session.add(new_user)
         db.session.commit()
         # Respond with success message
+        flash('Login successful!', 'success')
         return render_template('login.html')
     return render_template('register.html')
 
@@ -62,13 +63,14 @@ def login():
     if request.method == 'POST':
         mobile_number = request.form.get('mobile_number')
         password = request.form.get('password')
-
+        print(mobile_number,password,"mob and pass")
         # Query for the user by email
         user = User.query.filter_by(mobile_number=mobile_number).first()
         
         if user and user.check_password(password):
             print(user.groups,"user.groups")
             if any(group.name == 'admin' for group in user.groups):
+                
                 login_user(user)  # Log in the user
                 session['user_id'] = user.id  # Store the user's ID in the session (indicating they are logged in)
                 flash('Login successful!', 'success')
@@ -81,8 +83,8 @@ def login():
                 print('user')
                 return redirect(url_for('main.index'))
         else:
-            flash('Invalid email or password', 'danger')
-            return redirect(url_for('main.register'))
+            flash('Invalid email or password', 'error')
+            return redirect(url_for('main.login'))
     return render_template('login.html')
 
 @main.route('/dashboard')
@@ -100,65 +102,123 @@ def bookings():
 
 @main.route('/listing')
 def listing():
+    destinations = Destination.query.all()
+    return render_template('dashboard/listing.html', destinations=destinations)
 
-    return render_template('dashboard/listing.html')
+import os
+from werkzeug.utils import secure_filename
+import uuid
 
+def allowed_file(filename):
+    """
+    Check if the uploaded file has an allowed extension.
+    """
+    ALLOWED_EXTENSIONS = {'png', 'jpg', 'jpeg', 'gif', 'webp'}
+    return '.' in filename and \
+           filename.rsplit('.', 1)[1].lower() in ALLOWED_EXTENSIONS
 
-@main.route('/addtour',methods=['POST','GET'])
+def save_image(file, folder):
+    """
+    Save uploaded image and return a unique filename.
+    
+    :param file: FileStorage object from Flask
+    :param folder: Destination folder for saving the image
+    :return: Unique filename or None if saving fails
+    """
+    if file and allowed_file(file.filename):
+        # Generate a unique filename to prevent overwriting
+        filename = str(uuid.uuid4()) + '_' + secure_filename(file.filename)
+        
+        # Ensure the upload folder exists
+        os.makedirs(os.path.join(current_app.root_path, folder), exist_ok=True)
+        
+        # Save the file
+        file_path = os.path.join(current_app.root_path, folder, filename)
+        file.save(file_path)
+        
+        return filename
+    return None
+
+@main.route('/addtour', methods=['POST', 'GET'])
 def addtour():
     if request.method == 'POST':
-        title = request.form.get('title')
-        main_image = request.form.get('main_image')
-        category = request.form.get('category') 
-        rating = request.form.get('rating') 
-        description = request.form.get('description') 
-        price = request.form.get('price') 
-        destination = request.form.get('destination_place') 
-        currency_type = request.form.get('currency') 
-        language = request.form.get('language') 
-        sub_title = request.form.get('sub_title') 
-        sub_description = request.form.get('sub_description') 
-        sub_image = request.form.get('sub_image') 
+        try:
+            # Extract form data
+            title = request.form.get('title')
+            category = request.form.get('category')
+            rating = request.form.get('rating')
+            description = request.form.get('description')
+            price = request.form.get('price')
+            destination = request.form.get('destination_place')
+            currency_type = request.form.get('currency')
+            language = request.form.get('language')
+            sub_title = request.form.get('sub_title')
+            sub_description = request.form.get('sub_description')
 
-        print(main_image,sub_image,"language")
-        create_destination = Destination(
-            title=title,
-            main_image=main_image,
-            category=category,
-            price=price,
-            rating=rating,
-            destination=destination,
-            description=description,
-            currency_type=currency_type,
-            language=language,
-            sub_title=sub_title,
-            sub_description=sub_description,
-            sub_image=sub_image
-        )
+            # Handle main image upload
+            main_image = request.files.get('main_image')
+            main_image_filename = save_image(main_image, 'static/uploads/destinations')
 
-        # Add the destination to the session and commit
-        db.session.add(create_destination)
-        db.session.commit()
+            # Handle sub image upload
+            sub_image = request.files.get('sub_image')
+            sub_image_filename = save_image(sub_image, 'static/uploads/destinations')
 
-        image1 = request.form.get('image1') 
-        image2 = request.form.get('image2') 
-        image3 = request.form.get('image3') 
-        image4 = request.form.get('image4') 
-        print(destination,"destination",destination.id)
-        # Create a gallery and associate it with the destination
-        gallery = Gallery(
-            destination_id=destination.id,  # Associate with the created destination
-            image1=image1,
-            image2=image2,
-            image3=image3,
-            image4=image4
-        )
+            # Create destination object
+            create_destination = Destination(
+                title=title,
+                main_image=main_image_filename,
+                category=category,
+                price=price,
+                rating=rating,
+                destination=destination,
+                description=description,
+                currency_type=currency_type,
+                language=language,
+                sub_title=sub_title,
+                sub_description=sub_description,
+                sub_image=sub_image_filename
+            )
+            
+            # Add destination to the database
+            db.session.add(create_destination)
+            db.session.commit()
 
-        # # Add the gallery to the session and commit
-        db.session.add(gallery)
-        db.session.commit()
-        return redirect(url_for('main.listing'))
+            # Handle gallery images
+            image1 = request.form.get('image1')
+            image2 = request.form.get('image2')
+            image3 = request.form.get('image3')
+            image4 = request.form.get('image4')
+
+            gallery = Gallery(
+                destination_id=create_destination.id,  # Associate with the created destination
+                image1=image1,
+                image2=image2,
+                image3=image3,
+                image4=image4
+            )
+
+
+            # Add gallery to the database
+            db.session.add(gallery)
+            db.session.commit()
+
+            # Flash success message and redirect
+            flash(f'{destination} Destination Added Successfully!', 'success')
+            return redirect(url_for('main.listing'))
+
+        except Exception as e:
+            db.session.rollback()
+            print("Exception in addtour:", e)
+            flash(f'Error saving to database: {str(e)}', 'error')
+            return redirect(url_for('main.addtour'))
+
+    # Render the add tour template for GET requests
     return render_template('dashboard/addtour.html')
+
+def allowed_file(filename):
+    """Check if the file has a valid extension."""
+    ALLOWED_EXTENSIONS = {'png', 'jpg', 'jpeg', 'gif'}
+    return '.' in filename and filename.rsplit('.', 1)[1].lower() in ALLOWED_EXTENSIONS
 
 
 @main.route('/logout')

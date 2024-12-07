@@ -7,16 +7,40 @@
 
   <div class="dashboard__content_content">
 
+    {% with messages = get_flashed_messages(with_categories=True) %}
+      {% if messages %}
+        <div id="flash-messages">
+          {% for category, message in messages %}
+            {% if category == 'success' %}
+              <div class="alert alert-success" style="color: #fff;background-color: #05a35c;height:45px;width:80%;border-radius:10px;text-align:center;" role="alert">
+                {{message}}
+              </div>
+            {% elif category == 'error' %}
+                <div class="alert alert-danger" style="color: #fff;background-color: #ff1919c9;height:45px;width:80%;border-radius:10px;text-align:center;" role="alert">
+                  Please Check Your Mobile No & Password..!
+                </div>
+              
+            {% endif %}
+          {% endfor %}
+        </div>
+      {% endif %}
+    {% endwith %}
+
+
+
     <h1 class="text-30">Listings</h1>
 
     <div class="rounded-12 bg-white shadow-2 px-40 pt-40 pb-30 md:px-20 md:pt-20 md:pb-20 mt-60 md:mt-30">
+      
       <div class="row y-gap-30">
-
+        {% for destination in destinations %}
         <div class="col-lg-6">
           <div class="border-1 rounded-12 px-20 py-20">
             <div class="row x-gap-20 y-gap-20 items-center">
               <div class="col-xxl-auto">
-                <img src="img/dashboard/listing/1.jpg" alt="image" class="size-200 w-1/1 object-cover rounded-12">
+                <img src="{{ url_for('static', filename='uploads/destinations/' + destination.main_image) }}" alt="image" class="size-200 w-1/1 object-cover rounded-12">
+   
+
               </div>
 
               <div class="col">
@@ -26,7 +50,7 @@
                 </div>
 
                 <div class="text-18 lh-15 fw-500 mt-5">
-                  Phi Phi Islands Adventure Day Trip with Seaview Lunch by V. Marine Tour
+                  {{destination.title}}
                 </div>
 
                 <div class="d-flex items-center mt-5">
@@ -37,7 +61,7 @@
                     <i class="icon-star text-10"></i>
                     <i class="icon-star text-10"></i>
                   </div>
-                  <div>4.8 (269)</div>
+                  <div>{{destination.rating}}</div>
                 </div>
 
                 <div class="row y-gap-15 justify-between items-end pt-5">
@@ -50,8 +74,8 @@
 
                   <div class="col-auto">
                     <div class="text-right md:text-left">
-                      <div class="lh-14">$114.00</div>
-                      From <span class="text-20 fw-500">$1,200</span>
+                      <div class="lh-14">₹114.00</div>
+                      From <span class="text-20 fw-500">₹{{destination.price}}.00</span>
                     </div>
                   </div>
                 </div>
@@ -60,245 +84,9 @@
           </div>
         </div>
 
-        <div class="col-lg-6">
-          <div class="border-1 rounded-12 px-20 py-20">
-            <div class="row x-gap-20 y-gap-20 items-center">
-              <div class="col-xxl-auto">
-                <img src="img/dashboard/listing/2.jpg" alt="image" class="size-200 w-1/1 object-cover rounded-12">
-              </div>
+        {% endfor %}
 
-              <div class="col">
-                <div class="d-flex items-center">
-                  <i class="icon-pin mr-5"></i>
-                  Paris, France
-                </div>
-
-                <div class="text-18 lh-15 fw-500 mt-5">
-                  Starlight with Sea Cave Kayaking and Loy Krathong Floating
-                </div>
-
-                <div class="d-flex items-center mt-5">
-                  <div class="d-flex x-gap-5 text-yellow-2 mr-10">
-                    <i class="icon-star text-10"></i>
-                    <i class="icon-star text-10"></i>
-                    <i class="icon-star text-10"></i>
-                    <i class="icon-star text-10"></i>
-                    <i class="icon-star text-10"></i>
-                  </div>
-                  <div>4.8 (269)</div>
-                </div>
-
-                <div class="row y-gap-15 justify-between items-end pt-5">
-                  <div class="col-auto">
-                    <div class="d-flex items-center">
-                      <i class="icon-clock mr-5"></i>
-                      <div class="text-14">2 Days 1 Nights</div>
-                    </div>
-                  </div>
-
-                  <div class="col-auto">
-                    <div class="text-right md:text-left">
-                      <div class="lh-14">$114.00</div>
-                      From <span class="text-20 fw-500">$1,200</span>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <div class="col-lg-6">
-          <div class="border-1 rounded-12 px-20 py-20">
-            <div class="row x-gap-20 y-gap-20 items-center">
-              <div class="col-xxl-auto">
-                <img src="img/dashboard/listing/3.jpg" alt="image" class="size-200 w-1/1 object-cover rounded-12">
-              </div>
-
-              <div class="col">
-                <div class="d-flex items-center">
-                  <i class="icon-pin mr-5"></i>
-                  Paris, France
-                </div>
-
-                <div class="text-18 lh-15 fw-500 mt-5">
-                  James Bond Island Tour from Phuket by Longtail Boat with Lunch
-                </div>
-
-                <div class="d-flex items-center mt-5">
-                  <div class="d-flex x-gap-5 text-yellow-2 mr-10">
-                    <i class="icon-star text-10"></i>
-                    <i class="icon-star text-10"></i>
-                    <i class="icon-star text-10"></i>
-                    <i class="icon-star text-10"></i>
-                    <i class="icon-star text-10"></i>
-                  </div>
-                  <div>4.8 (269)</div>
-                </div>
-
-                <div class="row y-gap-15 justify-between items-end pt-5">
-                  <div class="col-auto">
-                    <div class="d-flex items-center">
-                      <i class="icon-clock mr-5"></i>
-                      <div class="text-14">2 Days 1 Nights</div>
-                    </div>
-                  </div>
-
-                  <div class="col-auto">
-                    <div class="text-right md:text-left">
-                      <div class="lh-14">$114.00</div>
-                      From <span class="text-20 fw-500">$1,200</span>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <div class="col-lg-6">
-          <div class="border-1 rounded-12 px-20 py-20">
-            <div class="row x-gap-20 y-gap-20 items-center">
-              <div class="col-xxl-auto">
-                <img src="img/dashboard/listing/4.jpg" alt="image" class="size-200 w-1/1 object-cover rounded-12">
-              </div>
-
-              <div class="col">
-                <div class="d-flex items-center">
-                  <i class="icon-pin mr-5"></i>
-                  Paris, France
-                </div>
-
-                <div class="text-18 lh-15 fw-500 mt-5">
-                  Zipline 18 Platform and ATV Adventure Tour From Phuket
-                </div>
-
-                <div class="d-flex items-center mt-5">
-                  <div class="d-flex x-gap-5 text-yellow-2 mr-10">
-                    <i class="icon-star text-10"></i>
-                    <i class="icon-star text-10"></i>
-                    <i class="icon-star text-10"></i>
-                    <i class="icon-star text-10"></i>
-                    <i class="icon-star text-10"></i>
-                  </div>
-                  <div>4.8 (269)</div>
-                </div>
-
-                <div class="row y-gap-15 justify-between items-end pt-5">
-                  <div class="col-auto">
-                    <div class="d-flex items-center">
-                      <i class="icon-clock mr-5"></i>
-                      <div class="text-14">2 Days 1 Nights</div>
-                    </div>
-                  </div>
-
-                  <div class="col-auto">
-                    <div class="text-right md:text-left">
-                      <div class="lh-14">$114.00</div>
-                      From <span class="text-20 fw-500">$1,200</span>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <div class="col-lg-6">
-          <div class="border-1 rounded-12 px-20 py-20">
-            <div class="row x-gap-20 y-gap-20 items-center">
-              <div class="col-xxl-auto">
-                <img src="img/dashboard/listing/5.jpg" alt="image" class="size-200 w-1/1 object-cover rounded-12">
-              </div>
-
-              <div class="col">
-                <div class="d-flex items-center">
-                  <i class="icon-pin mr-5"></i>
-                  Paris, France
-                </div>
-
-                <div class="text-18 lh-15 fw-500 mt-5">
-                  Phuket City Tour: Karon View Point, Big Buddha &amp; Wat Chalong
-                </div>
-
-                <div class="d-flex items-center mt-5">
-                  <div class="d-flex x-gap-5 text-yellow-2 mr-10">
-                    <i class="icon-star text-10"></i>
-                    <i class="icon-star text-10"></i>
-                    <i class="icon-star text-10"></i>
-                    <i class="icon-star text-10"></i>
-                    <i class="icon-star text-10"></i>
-                  </div>
-                  <div>4.8 (269)</div>
-                </div>
-
-                <div class="row y-gap-15 justify-between items-end pt-5">
-                  <div class="col-auto">
-                    <div class="d-flex items-center">
-                      <i class="icon-clock mr-5"></i>
-                      <div class="text-14">2 Days 1 Nights</div>
-                    </div>
-                  </div>
-
-                  <div class="col-auto">
-                    <div class="text-right md:text-left">
-                      <div class="lh-14">$114.00</div>
-                      From <span class="text-20 fw-500">$1,200</span>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <div class="col-lg-6">
-          <div class="border-1 rounded-12 px-20 py-20">
-            <div class="row x-gap-20 y-gap-20 items-center">
-              <div class="col-xxl-auto">
-                <img src="img/dashboard/listing/6.jpg" alt="image" class="size-200 w-1/1 object-cover rounded-12">
-              </div>
-
-              <div class="col">
-                <div class="d-flex items-center">
-                  <i class="icon-pin mr-5"></i>
-                  Paris, France
-                </div>
-
-                <div class="text-18 lh-15 fw-500 mt-5">
-                  Phang Nga Bay &amp; James Bond Island with Canoeing By Big Boat
-                </div>
-
-                <div class="d-flex items-center mt-5">
-                  <div class="d-flex x-gap-5 text-yellow-2 mr-10">
-                    <i class="icon-star text-10"></i>
-                    <i class="icon-star text-10"></i>
-                    <i class="icon-star text-10"></i>
-                    <i class="icon-star text-10"></i>
-                    <i class="icon-star text-10"></i>
-                  </div>
-                  <div>4.8 (269)</div>
-                </div>
-
-                <div class="row y-gap-15 justify-between items-end pt-5">
-                  <div class="col-auto">
-                    <div class="d-flex items-center">
-                      <i class="icon-clock mr-5"></i>
-                      <div class="text-14">2 Days 1 Nights</div>
-                    </div>
-                  </div>
-
-                  <div class="col-auto">
-                    <div class="text-right md:text-left">
-                      <div class="lh-14">$114.00</div>
-                      From <span class="text-20 fw-500">$1,200</span>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
+        
 
       </div>
 
@@ -324,13 +112,13 @@
           </button>
         </div>
 
-        <div class="text-14 text-center mt-20">Showing results 1-30 of 1,415</div>
+        
 
       </div>
     </div>
 
     <div class="text-center pt-30">
-      © Copyright Viatours 2023
+      © Copyright Tourm 2023
     </div>
 
   </div>

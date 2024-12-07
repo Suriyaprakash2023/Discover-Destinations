@@ -4,6 +4,7 @@ from flask_migrate import Migrate
 from .models import db, bcrypt  # Import `db` and `bcrypt` from models
 from .views import main
 from werkzeug.exceptions import RequestEntityTooLarge
+import os
 migrate = Migrate()
 
 def create_app():
@@ -15,6 +16,12 @@ def create_app():
     app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
     app.config['SECRET_KEY'] = 'supersecretkey12345'
     app.config['MAX_CONTENT_LENGTH'] = 500 * 1024 * 1024  # 500 MB
+
+    # Configuring upload folder
+    app.config['UPLOAD_FOLDER'] = os.path.join(os.getcwd(), 'static/images')
+
+
+
     # Initialize extensions
     db.init_app(app)
     bcrypt.init_app(app)
