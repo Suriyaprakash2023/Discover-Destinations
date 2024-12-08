@@ -7,7 +7,7 @@
           <div class="col-auto">
             <div class="header-logo">
               <a href="home-travel.html"
-                ><img src="static/img/logo.svg" alt="Tourm"
+                ><img src="{{ url_for('static', filename='img/logo.svg') }}" alt="Tourm"
               /></a>
             </div>
           </div>
@@ -18,12 +18,13 @@
                   <a class="active"  href="{{ url_for('main.index') }}">Home</a>
                   
                 </li>
-                <li>
-                  <a href="{{ url_for('main.about') }}">About Us</a>
-                </li>
                 <li class="menu-item-has">
                   <a href="{{ url_for('main.destination') }}">Destination</a>
                 </li>
+                <li>
+                  <a href="{{ url_for('main.about') }}">About Us</a>
+                </li>
+               
                 <li>
                   <a href="{{ url_for('main.contact') }}">Contact us</a>
                 </li>
@@ -51,7 +52,7 @@
       </div>
       <div
         class="logo-bg"
-        data-mask-src="static/img/logo_bg_mask.png"
+        data-mask-src="{{ url_for('static', filename='img/logo_bg_mask.png') }}"
       ></div>
     </div>
   </div>

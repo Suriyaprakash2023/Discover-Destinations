@@ -1,25 +1,25 @@
-<footer class="footer-wrapper footer-layout1">
+<footer class="footer-wrapper bg-title footer-layout2 mt-5">
   <div class="widget-area">
     <div class="container">
       <div class="newsletter-area">
         <div class="newsletter-top">
           <div class="row gy-4 align-items-center">
             <div class="col-lg-5">
-              <h2 class="newsletter-title text-capitalize mb-0">
+              <h2 class="newsletter-title text-white text-capitalize mb-0">
                 get updated the latest newsletter
               </h2>
             </div>
             <div class="col-lg-7">
-              <form class="newsletter-form">
+              <form class="newsletter-form style2">
                 <input
                   class="form-control"
                   type="email"
                   placeholder="Enter Email"
                   required=""
                 />
-                <button type="submit" class="th-btn style3">
+                <button type="submit" class="th-btn style1">
                   Subscribe Now
-                  <img src="static/img/icon/plane.svg" alt="" />
+                  <img src="{{ url_for('static', filename='img/icon/plane2.svg') }}" alt="" />
                 </button>
               </form>
             </div>
@@ -31,8 +31,8 @@
           <div class="widget footer-widget">
             <div class="th-widget-about">
               <div class="about-logo">
-                <a href="{{ url_for('main.index') }}"
-                  ><img src="static/img/logo3.svg" alt="Tourm"
+                <a href=""
+                  ><img src="{{ url_for('static', filename='img/logo-white.svg') }}" alt="Tourm"
                 /></a>
               </div>
               <p class="about-text">
@@ -66,7 +66,7 @@
               <ul class="menu">
                 <li><a href="{{ url_for('main.index') }}">Home</a></li>
                 <li><a href="{{ url_for('main.about') }}">About us</a></li>
-                <li><a href="{{ url_for('main.destination') }}">Our Service</a></li>
+                <li><a href="{{ url_for('main.contact') }}">Our Service</a></li>
                 <li><a href="{{ url_for('main.contact') }}">Terms of Service</a></li>
                 <li><a href="{{ url_for('main.contact') }}">Tour Booking Now</a></li>
               </ul>
@@ -75,11 +75,11 @@
         </div>
         <div class="col-md-6 col-xl-auto">
           <div class="widget footer-widget">
-            <h3 class="widget_title">Address</h3>
+            <h3 class="widget_title">Get In Touch</h3>
             <div class="th-widget-contact">
               <div class="info-box_text">
                 <div class="icon">
-                  <img src="static/img/icon/phone.svg" alt="img" />
+                  <img src="{{ url_for('static', filename='img/icon/phone.svg') }}" alt="img" />
                 </div>
                 <div class="details">
                   <p>
@@ -96,7 +96,7 @@
               </div>
               <div class="info-box_text">
                 <div class="icon">
-                  <img src="static/img/icon/envelope.svg" alt="img" />
+                  <img src="{{ url_for('static', filename='img/icon/envelope.svg') }}" alt="img" />
                 </div>
                 <div class="details">
                   <p>
@@ -117,7 +117,7 @@
               </div>
               <div class="info-box_text">
                 <div class="icon">
-                  <img src="static/img/icon/location-dot.svg" alt="img" />
+                  <img src="{{ url_for('static', filename='img/icon/location-dot.svg') }}" alt="img" />
                 </div>
                 <div class="details">
                   <p>789 Inner Lane, Holy park, California, USA</p>
@@ -132,7 +132,7 @@
             <div class="sidebar-gallery">
               <div class="gallery-thumb">
                 <img
-                  src="static/img/widget/gallery_1_1.jpg"
+                  src="{{ url_for('static', filename='img/widget/gallery_1_1.jpg') }}"
                   alt="Gallery Image"
                 />
                 <a
@@ -144,7 +144,7 @@
               </div>
               <div class="gallery-thumb">
                 <img
-                  src="static/img/widget/gallery_1_2.jpg"
+                  src="{{ url_for('static', filename='img/widget/gallery_1_2.jpg') }}"
                   alt="Gallery Image"
                 />
                 <a
@@ -156,7 +156,7 @@
               </div>
               <div class="gallery-thumb">
                 <img
-                  src="static/img/widget/gallery_1_3.jpg"
+                  src="{{ url_for('static', filename='img/widget/gallery_1_3.jpg') }}"
                   alt="Gallery Image"
                 />
                 <a
@@ -168,7 +168,7 @@
               </div>
               <div class="gallery-thumb">
                 <img
-                  src="static/img/widget/gallery_1_4.jpg"
+                  src="{{ url_for('static', filename='img/widget/gallery_1_4.jpg') }}"
                   alt="Gallery Image"
                 />
                 <a
@@ -180,7 +180,7 @@
               </div>
               <div class="gallery-thumb">
                 <img
-                  src="static/img/widget/gallery_1_5.jpg"
+                  src="{{ url_for('static', filename='img/widget/gallery_1_5.jpg') }}"
                   alt="Gallery Image"
                 />
                 <a
@@ -192,7 +192,7 @@
               </div>
               <div class="gallery-thumb">
                 <img
-                  src="static/img/widget/gallery_1_6.jpg"
+                  src="{{ url_for('static', filename='img/widget/gallery_1_6.jpg') }}"
                   alt="Gallery Image"
                 />
                 <a
@@ -208,28 +208,33 @@
       </div>
     </div>
   </div>
-  <div
-    class="copyright-wrap"
-    data-bg-src="static/img/bg/copyright_bg_1.jpg"
-  >
+  <div class="copyright-wrap">
     <div class="container">
       <div class="row justify-content-between align-items-center">
         <div class="col-md-6">
           <p class="copyright-text">
-            Copyright 2024 <a href="{{ url_for('main.index') }}">Tourm</a>. All Rights
+            Copyright 2024 <a href="{{ url_for('main.contact') }}">Tourm</a>. All Rights
             Reserved.
           </p>
         </div>
         <div class="col-md-6 text-end d-none d-md-block">
           <div class="footer-card">
             <span class="title">We Accept</span>
-            <img src="static/img/shape/cards.png" alt="" />
+            <img src="{{ url_for('static', filename='img/shape/cards.png') }}" alt="" />
           </div>
         </div>
       </div>
     </div>
   </div>
+  <div
+    class="shape-mockup movingX d-none d-xxl-block"
+    data-top="24%"
+    data-left="5%"
+  >
+    <img src="{{ url_for('static', filename='img/shape/shape_8.png') }}" alt="shape" />
+  </div>
 </footer>
+
 <div class="scroll-top">
   <svg
     class="progress-circle svg-content"

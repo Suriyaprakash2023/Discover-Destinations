@@ -1,8 +1,11 @@
 from flask import Blueprint, render_template,jsonify, request, redirect, url_for, flash, session,current_app
 from .models import *
 from werkzeug.security import generate_password_hash
-from flask_restful import Resource, Api
 from flask_login import LoginManager, login_user, logout_user, login_required, current_user
+import os
+from werkzeug.utils import secure_filename
+import uuid
+from datetime import datetime, timedelta
 
 main = Blueprint('main', __name__)
 
@@ -19,7 +22,16 @@ def about():
 
 @main.route('/destination')
 def destination():
-    return render_template('destination.html')
+    destinations = Destination.query.all()
+    for dest in destinations:
+        dest.rating = int(dest.rating)  # Convert string to integer
+    return render_template('destination.html',destinations=destinations)
+
+@main.route('/destination/<int:id>')
+def destination_detail(id):
+    destination = Destination.query.get_or_404(id)
+    return render_template('destination_detail.html',destination=destination)
+
 
 
 @main.route('/contact')
@@ -92,8 +104,15 @@ def dashboard():
     # if 'user_id' not in session:
     #     return redirect(url_for('login'))  # Redirect to login if not logged in
     # user = User.query.get(session['user_id'])
+    destination_count = Destination.query.count()
 
-    return render_template('dashboard/dashboard_index.html')
+    current_date = datetime.utcnow()
+    # Calculate the date 3 days ago
+    three_days_ago = current_date - timedelta(days=3)
+    # Query to count the number of destinations added in the last 3 days
+    recent_destination_count = Destination.query.filter(Destination.created_at >= three_days_ago).count()
+
+    return render_template('dashboard/dashboard_index.html',destination_count=destination_count,recent_destination_count=recent_destination_count)
 
 @main.route('/bookings')
 def bookings():
@@ -102,12 +121,11 @@ def bookings():
 
 @main.route('/listing')
 def listing():
+    
     destinations = Destination.query.all()
     return render_template('dashboard/listing.html', destinations=destinations)
 
-import os
-from werkzeug.utils import secure_filename
-import uuid
+
 
 def allowed_file(filename):
     """
@@ -149,6 +167,7 @@ def addtour():
             rating = request.form.get('rating')
             description = request.form.get('description')
             price = request.form.get('price')
+            days = request.form.get('days')
             destination = request.form.get('destination_place')
             currency_type = request.form.get('currency')
             language = request.form.get('language')
@@ -169,6 +188,7 @@ def addtour():
                 main_image=main_image_filename,
                 category=category,
                 price=price,
+                days=days,
                 rating=rating,
                 destination=destination,
                 description=description,

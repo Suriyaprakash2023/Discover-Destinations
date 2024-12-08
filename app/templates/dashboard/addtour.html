@@ -55,8 +55,19 @@
                     <div class="col-12">
 
                       <div class="form-input ">
-                        <input type="text" name='category' required>
-                        <label class="lh-1 text-16 text-light-1">Category</label>
+                        <label class="lh-1 text-16 ">Category</label>
+                      <div class="form-input ">
+                        
+                        <select name="category" required>
+                          <option value='Cruises'>Cruises</option>
+                          <option value='Hiking'>Hiking</option>
+                          <option value='Airbirds'>Airbirds</option>
+                          <option value='Wildlife'>Wildlife</option>
+                          <option value='Walking'>Walking</option>
+                        
+                        </select>
+                        
+                      </div>
                       </div>
 
                     </div>
@@ -72,8 +83,19 @@
                     <div class="col-12">
 
                       <div class="form-input ">
-                        <input type="text" name='rating' required>
-                        <label class="lh-1 text-16 text-light-1">Rating</label>
+                        <label class="lh-1 text-16 ">Ratings</label>
+                      <div class="form-input ">
+                        
+                        <select name="rating" required>
+                          <option value='1'>1</option>
+                          <option value='2'>2</option>
+                          <option value='3'>3</option>
+                          <option value='4'>4</option>
+                          <option value='5'>5</option>
+                         
+                        </select>
+                        
+                      </div>
                       </div>
 
                     </div>
@@ -126,14 +148,7 @@
 
                   <div class="contactForm row y-gap-30">
                     
-                    <div class="col-12">
-
-                      <div class="form-input ">
-                        <input type="text"  name='price' required>
-                        <label class="lh-1 text-16 text-light-1">₹ Price</label>
-                      </div>
-
-                    </div>
+                    
                     <div class="col-12">
 
                       <div class="form-input ">
@@ -142,7 +157,35 @@
                       </div>
 
                     </div>
-              
+                    
+                    <div class="col-6">
+
+                      <div class="form-input ">
+                        <input type="text"  name='price' minlength="3" maxlength="7"  required>
+                        <label class="lh-1 text-16 text-light-1">₹ Price</label>
+                      </div>
+
+                    </div>
+                    <div class="col-6">
+
+                      <div class="form-input ">
+                        <label class="lh-1 text-16 ">Days</label>
+                      <div class="form-input ">
+                        
+                        <select name="days" required>
+                          <option value='1'>1</option>
+                          <option value='2'>2</option>
+                          <option value='3'>3</option>
+                          <option value='4'>4</option>
+                          <option value='5'>5</option>
+                          <option value='6'>6</option>
+                          <option value='7'>7</option>
+                        </select>
+                        
+                      </div>
+                      </div>
+
+                    </div>
 
                     <div class="col-lg-6">
                       <label class="lh-1 text-16 ">Currency Used</label>

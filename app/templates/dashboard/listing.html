@@ -4,8 +4,7 @@
 
 
 
-
-  <div class="dashboard__content_content">
+  <div class="dashboard__content_content" style="height:100vh;">
 
     {% with messages = get_flashed_messages(with_categories=True) %}
       {% if messages %}
@@ -46,7 +45,7 @@
               <div class="col">
                 <div class="d-flex items-center">
                   <i class="icon-pin mr-5"></i>
-                  Paris, France
+                 {{destination.destination}}
                 </div>
 
                 <div class="text-18 lh-15 fw-500 mt-5">
@@ -55,26 +54,25 @@
 
                 <div class="d-flex items-center mt-5">
                   <div class="d-flex x-gap-5 text-yellow-2 mr-10">
-                    <i class="icon-star text-10"></i>
-                    <i class="icon-star text-10"></i>
-                    <i class="icon-star text-10"></i>
-                    <i class="icon-star text-10"></i>
-                    <i class="icon-star text-10"></i>
-                  </div>
-                  <div>{{destination.rating}}</div>
+                    {% for i in range(destination.rating|int) %}
+                        <i class="icon-star text-10"></i>
+                    {% endfor %}
+                </div>
+                
+                  <div>({{destination.rating}})</div>
                 </div>
 
                 <div class="row y-gap-15 justify-between items-end pt-5">
                   <div class="col-auto">
                     <div class="d-flex items-center">
                       <i class="icon-clock mr-5"></i>
-                      <div class="text-14">2 Days 1 Nights</div>
+                      <div class="text-14">{{destination.days}} Days </div>
                     </div>
                   </div>
 
                   <div class="col-auto">
                     <div class="text-right md:text-left">
-                      <div class="lh-14">₹114.00</div>
+                      
                       From <span class="text-20 fw-500">₹{{destination.price}}.00</span>
                     </div>
                   </div>
@@ -92,22 +90,14 @@
 
       <div class="mt-30">
 
-        <div class="pagination justify-center">
-          <button class="pagination__button button -accent-1 mr-15 -prev">
+        <div class="pagination justify-center" id="pagination">
+          <button id="prev-button" class="pagination__button button -accent-1 mr-15 -prev" disabled>
             <i class="icon-arrow-left text-15"></i>
           </button>
-
-          <div class="pagination__count">
-            <a href="#">1</a>
-            <a href="#" class="is-active">2</a>
-            <a href="#">3</a>
-            <a href="#">4</a>
-            <a href="#">5</a>
-            <div>...</div>
-            <a href="#">20</a>
-          </div>
-
-          <button class="pagination__button button -accent-1 ml-15 -next">
+        
+          <div class="pagination__count" id="pagination-numbers"></div>
+        
+          <button id="next-button" class="pagination__button button -accent-1 ml-15 -next">
             <i class="icon-arrow-right text-15"></i>
           </button>
         </div>
@@ -117,12 +107,91 @@
       </div>
     </div>
 
-    <div class="text-center pt-30">
+    <div class="text-center pb-30" style="
+    bottom: 0;
+    position: absolute;
+    left: 50%;
+">
       © Copyright Tourm 2023
     </div>
 
   </div>
 </div>
 
+<script>
+  document.addEventListener('DOMContentLoaded', function () {
+    const destinations = [...document.querySelectorAll('.row.y-gap-30 .col-lg-6')]; // Collect all destination elements
+    const itemsPerPage = 6; // Number of items per page
+    const paginationNumbers = document.getElementById('pagination-numbers');
+    const prevButton = document.getElementById('prev-button');
+    const nextButton = document.getElementById('next-button');
+    let currentPage = 1;
+
+    // Function to display items for the current page
+    const displayPage = (page) => {
+      const start = (page - 1) * itemsPerPage;
+      const end = start + itemsPerPage;
+
+      destinations.forEach((destination, index) => {
+        if (index >= start && index < end) {
+          destination.style.display = 'block'; // Show the item
+        } else {
+          destination.style.display = 'none'; // Hide the item
+        }
+      });
+    };
+
+    // Function to update pagination controls
+    const updatePagination = () => {
+      paginationNumbers.innerHTML = '';
+      const totalPages = Math.ceil(destinations.length / itemsPerPage);
+
+      // Create page buttons
+      for (let i = 1; i <= totalPages; i++) {
+        const pageNumber = document.createElement('button');
+        pageNumber.className = 'pagination__number button';
+        pageNumber.textContent = i;
+
+        if (i === currentPage) {
+          pageNumber.classList.add('-active'); // Highlight current page
+        }
+
+        pageNumber.addEventListener('click', () => {
+          currentPage = i;
+          displayPage(currentPage);
+          updatePagination();
+        });
+
+        paginationNumbers.appendChild(pageNumber);
+      }
+
+      // Enable or disable navigation buttons
+      prevButton.disabled = currentPage === 1;
+      nextButton.disabled = currentPage === totalPages;
+    };
+
+    // Add event listeners to navigation buttons
+    prevButton.addEventListener('click', () => {
+      if (currentPage > 1) {
+        currentPage--;
+        displayPage(currentPage);
+        updatePagination();
+      }
+    });
+
+    nextButton.addEventListener('click', () => {
+      const totalPages = Math.ceil(destinations.length / itemsPerPage);
+      if (currentPage < totalPages) {
+        currentPage++;
+        displayPage(currentPage);
+        updatePagination();
+      }
+    });
+
+    // Initialize pagination
+    displayPage(currentPage);
+    updatePagination();
+  });
+</script>
 
 {% endblock content %}

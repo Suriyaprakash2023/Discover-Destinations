@@ -1,6 +1,7 @@
 from flask_sqlalchemy import SQLAlchemy
 from flask_bcrypt import Bcrypt
 from werkzeug.security import check_password_hash
+from datetime import datetime
 
 db = SQLAlchemy()
 bcrypt = Bcrypt()
@@ -65,6 +66,7 @@ class Destination(db.Model):
     main_image = db.Column(db.String(255), nullable=False)
     category = db.Column(db.String(80),nullable=False)
     price = db.Column(db.String(80), nullable=False)
+    days = db.Column(db.String(80), nullable=False)
     rating = db.Column(db.String(120),  nullable=False)
     description = db.Column(db.String(500), nullable=False)
     destination = db.Column(db.String(80),  nullable=False)
@@ -73,7 +75,7 @@ class Destination(db.Model):
     sub_title = db.Column(db.String(80),  nullable=False)
     sub_description = db.Column(db.String(300), nullable=False)
     sub_image = db.Column(db.String(255), nullable=False)
-
+    created_at = db.Column(db.DateTime, default=datetime.utcnow, nullable=False)
     # Adding the relationship for Galleries associated with this Destination
     galleries = db.relationship('Gallery', backref='destination', lazy=True)
 
