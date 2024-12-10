@@ -22,7 +22,7 @@ def about():
 
 @main.route('/destination')
 def destination():
-    destinations = Destination.query.all()
+    destinations = Destination.query.order_by(Destination.created_at.desc()).all()
     for dest in destinations:
         dest.rating = int(dest.rating)  # Convert string to integer
     return render_template('destination.html',destinations=destinations)
@@ -30,6 +30,7 @@ def destination():
 @main.route('/destination/<int:id>')
 def destination_detail(id):
     destination = Destination.query.get_or_404(id)
+
     return render_template('destination_detail.html',destination=destination)
 
 
@@ -173,13 +174,15 @@ def addtour():
             language = request.form.get('language')
             sub_title = request.form.get('sub_title')
             sub_description = request.form.get('sub_description')
-
+            images = request.files.get('images')
+            print(images,"gffdgfhgfhjhg")
             # Handle main image upload
             main_image = request.files.get('main_image')
             main_image_filename = save_image(main_image, 'static/uploads/destinations')
 
             # Handle sub image upload
             sub_image = request.files.get('sub_image')
+         
             sub_image_filename = save_image(sub_image, 'static/uploads/destinations')
 
             # Create destination object
@@ -203,18 +206,25 @@ def addtour():
             db.session.add(create_destination)
             db.session.commit()
 
-            # Handle gallery images
-            image1 = request.form.get('image1')
-            image2 = request.form.get('image2')
-            image3 = request.form.get('image3')
-            image4 = request.form.get('image4')
+            image1 = request.files.get('image1')
+            image2 = request.files.get('image2')
+            image3 = request.files.get('image3')
+            image4 = request.files.get('image4')
 
+            print(image1,image2,image3,image4,"image1")
+            image1_filename = save_image(image1, 'static/uploads/gallery')
+            image2_filename = save_image(image2, 'static/uploads/gallery')
+            image3_filename = save_image(image3, 'static/uploads/gallery')
+            image4_filename = save_image(image4, 'static/uploads/gallery')
+            print(image1_filename,image2_filename,image3_filename,image4_filename,"image1_filename")
+            # Handle gallery images
+           
             gallery = Gallery(
                 destination_id=create_destination.id,  # Associate with the created destination
-                image1=image1,
-                image2=image2,
-                image3=image3,
-                image4=image4
+                image1=image1_filename,
+                image2=image2_filename,
+                image3=image3_filename,
+                image4=image4_filename
             )
 
 
@@ -240,6 +250,14 @@ def allowed_file(filename):
     ALLOWED_EXTENSIONS = {'png', 'jpg', 'jpeg', 'gif'}
     return '.' in filename and filename.rsplit('.', 1)[1].lower() in ALLOWED_EXTENSIONS
 
+@main.route('/edit_tour/<int:id>/', methods=['POST','GET'])
+def edit_tour(id):
+    destination = Destination.query.get_or_404(id)
+    if request.method == 'POST':
+        flash(f'Error saving to database', 'error')
+        return redirect(url_for('main.edit_tour'))
+    
+    return render_template('dashboard/edit_tour.html',destination=destination)
 
 @main.route('/logout')
 def logout():

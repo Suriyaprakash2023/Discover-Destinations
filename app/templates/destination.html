@@ -1,7 +1,7 @@
 {% extends 'base.html' %}
 
 {% block content %}
-
+{% include 'header.html' %}
 <div class="breadcumb-wrapper" data-bg-src="{{ url_for('static', filename='img/bg/breadcumb-bg.jpg') }}">
   <div class="container">
     <div class="breadcumb-content">
@@ -72,7 +72,7 @@
               {% for destination in destinations %}
                 <div class="col-xxl-4 col-xl-6">
                   <div class="tour-box th-ani">
-                    <div class="tour-box_img global-img">
+                    <div class="tour-box_img global-img" style="height: 191px;">
                       <a href="{{ url_for('main.destination_detail', id=destination.id) }}">
                         <img src="{{ url_for('static', filename='uploads/destinations/' + destination.main_image) }}" alt="image" />
                       </a>

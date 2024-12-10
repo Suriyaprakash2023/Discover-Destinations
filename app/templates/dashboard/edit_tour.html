@@ -26,7 +26,7 @@
       {% endif %}
     {% endwith %}
 <div   class="d-flex justify-content-between">
-    <h1 class="text-30">Add Tour</h1>
+    <h1 class="text-30">Edit Tour</h1>
    
    
 </div>
@@ -39,7 +39,7 @@
           </div>
 
         </div>
-        <form action='/addtour' method='POST' enctype="multipart/form-data">
+        <form action='/edit_tour/{{destination.id}}' method='POST' enctype="multipart/form-data">
           <div class="row pt-40">
             <div class="col-12">
               <div class="tabs__content js-tabs-content">
@@ -48,7 +48,7 @@
                     <div class="col-12">
 
                       <div class="form-input ">
-                        <input type="text" name='title' required>
+                        <input type="text" name='title' value='{{destination.title}}' required>
                         <label class="lh-1 text-16 text-light-1">Tour Title</label>
                       </div>
 
@@ -60,6 +60,7 @@
                       <div class="form-input ">
                         
                         <select name="category" required>
+                          <option value='{{destination.category}}'>{{destination.category}}</option>
                           <option value='Cruises'>Cruises</option>
                           <option value='Hiking'>Hiking</option>
                           <option value='Airbirds'>Airbirds</option>
@@ -89,6 +90,7 @@
                       <div class="form-input ">
                         
                         <select name="rating" required>
+                          <option value='{{destination.rating}}'>{{destination.rating}}</option>
                           <option value='1'>1</option>
                           <option value='2'>2</option>
                           <option value='3'>3</option>
@@ -105,7 +107,7 @@
                     <div class="col-12">
 
                       <div class="form-input ">
-                        <textarea required  name='description' rows="8"></textarea>
+                        <textarea required  name='description'  rows="8">{{destination.description}}</textarea>
                         <label class="lh-1 text-16 text-light-1">Description</label>
                       </div>
 
@@ -129,7 +131,7 @@
                     <div class="col-12">
 
                       <div class="form-input ">
-                        <input type="text" name='destination_place' required>
+                        <input type="text" name='destination_place' value="{{destination.destination}}" required>
                         <label class="lh-1 text-16 text-light-1">Destination</label>
                       </div>
 
@@ -138,7 +140,7 @@
                     <div class="col-6">
 
                       <div class="form-input ">
-                        <input type="text"  name='price' minlength="3" maxlength="7"  required>
+                        <input type="text" value='{{destination.price}}' name='price' minlength="3" maxlength="7"  required>
                         <label class="lh-1 text-16 text-light-1">₹ Price</label>
                       </div>
 
@@ -150,6 +152,7 @@
                       <div class="form-input ">
                         
                         <select name="days" required>
+                          <option value='{{destination.days}}'>{{destination.days}}</option>
                           <option value='1'>1</option>
                           <option value='2'>2</option>
                           <option value='3'>3</option>
@@ -169,6 +172,7 @@
                       <div class="form-input ">
                         
                         <select name="currency" required>
+                          <option value='{{destination.currency_type}}'>{{destination.currency_type}}</option>
                           <option value='Eure'>Eure</option>
                           <option value='Doller'>Doller</option>
                           <option value='Rupee'>Rupee</option>
@@ -178,10 +182,11 @@
 
                     </div>
                     <div class="col-lg-6">
-                      <label class="lh-1 text-16 ">Language</label>
+                      <label class="lh-1 text-16 ">{{destination.language}}</label>
                       <div class="form-input ">
                         
                         <select  name="language" required>
+                          <option value='{{destination.language}}'>{{destination.language}}</option>
                           <option value='English'>English</option>
                           <option value='Doller'>Doller</option>
                           <option value='Rupee'>Rupee</option>
@@ -193,7 +198,7 @@
                     <div class="col-12">
 
                       <div class="form-input ">
-                        <input type="text" name='sub_title' required>
+                        <input type="text" name='sub_title' value='{{destination.sub_title}}' required>
                         <label class="lh-1 text-16 text-light-1">Sub Title</label>
                       </div>
 
@@ -202,7 +207,7 @@
                     <div class="col-12">
 
                       <div class="form-input ">
-                        <textarea required  name='sub_description' rows="4"></textarea>
+                        <textarea required  name='sub_description'  rows="4">{{destination.sub_description}}</textarea>
                         <label class="lh-1 text-16 text-light-1">Sub Description</label>
                       </div>
 

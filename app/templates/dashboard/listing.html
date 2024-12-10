@@ -41,13 +41,23 @@
    
 
               </div>
-
+              
               <div class="col">
+                <div style="display:flex;justify-content: end;">
+                  <a href="{{ url_for('main.edit_tour', id=destination.id) }}">
+                  <button style="background:#dddddd ;padding:10px;border-radius:20px;background:green;color:white;" >
+                    <img style="color:white;" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABgAAAAYCAYAAADgdz34AAAAAXNSR0IArs4c6QAAAMBJREFUSEvFldENglAMRQ+TyCpuopOIk+gmuoluommCScUWWvsI74+EnNN3ewkdK59uZT5VwQHYAWdv0IpA4JcRPHiSiuAB9GpyU1IRCPymJFfgOI0qK5BYTsAeeI5wkdwtuMgyAp25wLVEns0TFWj4B6QlbtsjAgsuQDPz7A5K8KUdlOFzgiZwT9AM7gleRiVCC7WqZLVoKvgbHrlBCb7Uoia/isiHVhJtIrBalLnF19CRFmXgP3vdJKLsxLPvvwH7UiQZJ53cyQAAAABJRU5ErkJggg=="/> 
+                    Edit
+                  </button>
+                </a>
+                </div>
                 <div class="d-flex items-center">
                   <i class="icon-pin mr-5"></i>
+                
                  {{destination.destination}}
+                
                 </div>
-
+               
                 <div class="text-18 lh-15 fw-500 mt-5">
                   {{destination.title}}
                 </div>
