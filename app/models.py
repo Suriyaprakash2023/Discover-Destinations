@@ -2,6 +2,7 @@ from flask_sqlalchemy import SQLAlchemy
 from flask_bcrypt import Bcrypt
 from werkzeug.security import check_password_hash
 from datetime import datetime
+from sqlalchemy.orm import relationship
 
 db = SQLAlchemy()
 bcrypt = Bcrypt()
@@ -21,7 +22,7 @@ class User(db.Model):
     email = db.Column(db.String(120), unique=True, nullable=False)
     password_hash = db.Column(db.String(128), nullable=False)
     groups = db.relationship('Group', secondary=user_groups, back_populates='users')
-
+    bookings = relationship('DestinationBooking', back_populates='user')
     def __init__(self, username, email, password):
         self.username = username
         self.email = email
@@ -79,6 +80,7 @@ class Destination(db.Model):
     # Adding the relationship for Galleries associated with this Destination
     galleries = db.relationship('Gallery', backref='destination', lazy=True)
 
+    bookings = relationship('DestinationBooking', back_populates='destination')
     def __repr__(self):
         return f'{self.title}'
 
@@ -95,3 +97,27 @@ class Gallery(db.Model):
 
     def __repr__(self):
         return f'{self.destination_id}'
+    
+
+class DestinationBooking(db.Model):
+    __tablename__ = 'destination_booking'
+    
+    # Primary Key
+    id = db.Column(db.Integer, primary_key=True)
+    # Foreign Keys
+    destination_id = db.Column(db.Integer, db.ForeignKey('destination.id'), nullable=False)
+    user_id = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=False)
+    
+    # Booking Details
+    from_date = db.Column(db.DateTime, nullable=False)
+    to_date = db.Column(db.DateTime, nullable=False)
+    no_of_persons = db.Column(db.Integer, nullable=False)
+    amount = db.Column(db.Float, nullable=False)
+    created_at = db.Column(db.DateTime, default=datetime.utcnow, nullable=False)
+    
+    # Relationships
+    destination = relationship('Destination', back_populates='bookings')
+    user = relationship('User', back_populates='bookings')
+
+    def __repr__(self):
+        return f'{self.user.username}' - f'{self.destination.destination}'

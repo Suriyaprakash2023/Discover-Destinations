@@ -29,6 +29,7 @@ def destination():
 
 @main.route('/destination/<int:id>')
 def destination_detail(id):
+    print(current_user.username,"user")
     destination = Destination.query.get_or_404(id)
 
     return render_template('destination_detail.html',destination=destination)
@@ -264,3 +265,29 @@ def logout():
     # Remove the user from the session to log them out
     session.pop('user_id', None)  # This will remove the 'user' from the session
     return redirect(url_for('main.index'))  # Redirect to home page after logout
+
+
+@main.route('/booking')
+@login_required
+def booking():
+    if request.method == 'POST':
+        destination_id = request.form.get('destination_id')
+        from_date = request.form.get('from_date')
+        to_date = request.form.get('to_date')
+        no_of_persons = request.form.get('no_of_persons')
+        amount = request.form.get('amount')
+        
+        print(destination_id,from_date,to_date,no_of_persons,amount,"amount")
+        # new_booking = DestinationBooking(
+        # destination_id=destination.id,
+        # user_id=current_user.id,
+        # from_date=datetime(2024, 7, 1),
+        # to_date=datetime(2024, 7, 10),
+        # no_of_persons=2,
+        # amount=1500.00
+        # )
+        # db.session.add(new_booking)
+        # db.session.commit()
+
+        destination = Destination.query.get_or_404(1) #destination_id
+        return render_template('destination_detail.html',destination=destination)

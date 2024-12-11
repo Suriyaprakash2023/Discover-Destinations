@@ -74,87 +74,79 @@
   ;
       justify-content: center;
       align-items: center; ">
-    <div class="modal-content" style="width:100vh; padding:15px 10px 15px 10px;margin-top:100px;" >
+    <div class="modal-content" style="width:80vh; padding:15px 10px 15px 10px;margin-top:100px;" >
       <div class="modal-header" style="padding:0px">
         <h5 class="modal-title" id="bookTourModalLabel">Book a {{destination.destination}} Tour</h5>
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
-      <div class="modal-body"style= "width:100vh"  >
-        <form
-          action="mail.php"
-          method="POST"
-          class="contact-form style2 ajax-contact"
-        >
+      <div class="modal-body"style= "width:80vh"  >
+        <form action="/booking" method="POST" class="contact-form style2 ajax-contact">
           <div class="row">
             <div class="col-12 form-group">
-              <label >From Date </label >
+              <label>From Date</label>
               <input
                 type="date"
                 class="form-control"
                 name="from_date"
-                id="name3"
-                
+                id="from_date"
+               
               />
-              
             </div>
             <div class="col-12 form-group">
-              <label >To Date </label >
+              <label>To Date</label>
               <input
                 type="date"
                 class="form-control"
                 name="to_date"
-                id="name3"
+                id="to_date"
                 readonly
-                
               />
-              
             </div>
-            
             <div class="form-group col-12">
-              <label >No Of Person </label >
+              <label>No Of Person</label>
               <select
-                name="no_of_person"
-                id="subject"
+                name="noofperson"
+                id="no_of_person"
                 class="form-select nice-select"
+                 onchange="handleNoOfPersonChange(this.value)"
               >
-               
+                
                 <option value="1">1</option>
                 <option value="2">2</option>
                 <option value="3">3</option>
-                
               </select>
             </div>
+        
+
+            <!-- Amount -->
             <div class="form-group col-12">
-              <label >Amount </label >
+              <label>Amount</label>
               <input
                 type="text"
                 class="form-control"
                 name="amount"
-                id="name3"
+                id="amount"
+                value={{destination.price}}
                 readonly
-                
+                placeholder="Amount will be shown here"
               />
             </div>
+
+            <input type='hidden' name='destination_id' value={{destination.id}}>
             <div class="form-btn col-12 mt-24">
               <button type="submit" class="th-btn style3">
-                Send message
-                <img src="static/img/icon/plane.svg" alt="" />
+                Click to Confirm
+                <img src="{{ url_for('static', filename='img/icon/plane.svg') }}" alt="" />
               </button>
             </div>
           </div>
           <p class="form-messages mb-0 mt-3"></p>
         </form>
+        
       </div>
     </div>
   </div>
 </div>
-
-
-
-
-
-
-
 
 
 
@@ -208,6 +200,7 @@
                   <li>Language</li>
                   <li>Currency Used</li>
                   <li>Per Person</li>
+                  <li>Days</li>
                 </ul>
               </div>
               <div class="checklist style2">
@@ -216,6 +209,7 @@
                   <li>{{destination.language}}</li>
                   <li>{{destination.currency_type}}</li>
                   <li>₹{{destination.price}}.00</li>
+                  <li>{{destination.days}} Days</li>
                 </ul>
               </div>
             </div>
@@ -688,8 +682,62 @@
   </div>
 </section>
 
+<input
+  type="date"
+  class="form-control"
+  name="from_date"
+  id="from_date"
+/>
+<input
+  type="date"
+  class="form-control"
+  name="to_date"
+  id="to_date"
+/>
+
+<script>
+  document.addEventListener("DOMContentLoaded", () => {
+    const fromDateInput = document.getElementById("from_date");
+    const toDateInput = document.getElementById("to_date");
+    const destinationDays = {{ destination.days }}; // Replace with actual dynamic value from your backend
+
+    // Set the minimum date for the from_date input to today
+    const today = new Date();
+    const formattedToday = today.toISOString().split("T")[0];
+    fromDateInput.setAttribute("min", formattedToday);
+
+    fromDateInput.addEventListener("change", () => {
+      const fromDateValue = fromDateInput.value;
+      if (fromDateValue) {
+        const fromDate = new Date(fromDateValue);
+
+        // Calculate To Date
+        const toDate = new Date(fromDate);
+        toDate.setDate(toDate.getDate() + destinationDays);
+
+        // Format To Date as YYYY-MM-DD
+        const formattedToDate = toDate.toISOString().split("T")[0];
+
+        // Update the To Date field
+        toDateInput.value = formattedToDate;
+        toDateInput.setAttribute("min", formattedToDate); // Optional: Set To Date's minimum value
+      }
+    });
+  });
+</script>
 
 
+
+<script>
+  // Inline event handler function
+  function handleNoOfPersonChange(selectedValue) {
+    const amount = document.getElementById("amount");
+    convertedvalue =  Number(selectedValue)
+    totalAmount = convertedvalue * {{destination.price}}
+    console.log("Selected No of Person:",totalAmount);
+    amount.value = totalAmount;
+  }
+</script>
 
 
 {% endblock content %}
