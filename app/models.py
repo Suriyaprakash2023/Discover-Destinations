@@ -109,15 +109,25 @@ class DestinationBooking(db.Model):
     user_id = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=False)
     
     # Booking Details
-    from_date = db.Column(db.DateTime, nullable=False)
-    to_date = db.Column(db.DateTime, nullable=False)
+    from_date = db.Column(db.Date, nullable=False)
+    to_date = db.Column(db.Date, nullable=False)
     no_of_persons = db.Column(db.Integer, nullable=False)
     amount = db.Column(db.Float, nullable=False)
     created_at = db.Column(db.DateTime, default=datetime.utcnow, nullable=False)
-    
+    status = db.Column(db.String(255), default='Pendding')
     # Relationships
     destination = relationship('Destination', back_populates='bookings')
     user = relationship('User', back_populates='bookings')
 
+    @classmethod
+    def check_existing_booking(cls, user_id, destination_id, from_date, to_date):
+        existing_booking = cls.query.filter(
+            cls.user_id == user_id,
+            cls.destination_id == destination_id,
+            cls.from_date <= to_date,
+            cls.to_date >= from_date
+        ).first()
+        return existing_booking is not None
+
     def __repr__(self):
-        return f'{self.user.username}' - f'{self.destination.destination}'
+        return f'{self.user.username}' 

@@ -4,7 +4,32 @@
 
 <div class="dashboard__content_content">
 
+
+
   <h1 class="text-30">Bookings</h1>
+
+
+
+  {% with messages = get_flashed_messages(with_categories=True) %}
+  {% if messages %}
+    <div id="flash-messages">
+      {% for category, message in messages %}
+        {% if category == 'success' %}
+          <div class="alert alert-success" style="color: #fff;background-color: #05a35c;height:45px;width:80%;border-radius:10px;text-align:center;" role="alert">
+            {{message}}
+          </div>
+        {% elif category == 'error' %}
+            <div class="alert alert-danger" style="color: #fff;background-color: #ff1919c9;height:45px;width:80%;border-radius:10px;text-align:center;" role="alert">
+              {{message}}
+            </div>
+          
+        {% endif %}
+      {% endfor %}
+    </div>
+  {% endif %}
+{% endwith %}
+
+
 
   <div class="rounded-12 bg-white shadow-2 px-40 pt-40 pb-30 md:px-20 md:pt-20 md:mb-20 mt-60">
     <div class="tabs -underline-2 js-tabs">
@@ -14,12 +39,9 @@
           <button class="tabs__button text-20 lh-12 fw-500 pb-15 lg:pb-0 js-tabs-button is-tab-el-active" data-tab-target=".-tab-item-1">Approved</button>
         </div>
 
-        <div class="col-auto">
-          <button class="tabs__button text-20 lh-12 fw-500 pb-15 lg:pb-0 js-tabs-button " data-tab-target=".-tab-item-2">Pending</button>
-        </div>
 
         <div class="col-auto">
-          <button class="tabs__button text-20 lh-12 fw-500 pb-15 lg:pb-0 js-tabs-button " data-tab-target=".-tab-item-3">Cancelled</button>
+          <button class="tabs__button text-20 lh-12 fw-500 pb-15 lg:pb-0 js-tabs-button " data-tab-target=".-tab-item-3">Completed</button>
         </div>
 
       </div>
@@ -31,193 +53,71 @@
             <table class="tableTest mb-30">
               <thead class="bg-light-1 rounded-12">
                 <tr>
+                  <th>S.No</th>
                   <th>ID</th>
                   <th>Title</th>
                   <th>Start date</th>
                   <th>End date</th>
-                  <th>Details</th>
+                  <th>Persons</th>
                   <th>Price</th>
-                  <th>Status</th>
+                 
                   <th>Action</th>
                 </tr>
               </thead>
 
               <tbody>
-
+                {% for booking in Pendding_bookings|reverse %}
                 <tr>
-                  <td>#484</td>
+                  <td>{{ loop.index }}</td>
+
+                  <td style="color:#18d30e;">#000{{booking.id}}</td>
 
                   <td class="min-w-300">
                     <div class="d-flex items-center">
-                      <img src="img/dashboard/booking/1.jpg" alt="image">
-                      <div class="ml-20">Phi Phi Islands Adventure Day Trip with Seaview Lunch by V. Marine Tour</div>
+
+                      <div class="ml-20">{{booking.destination}}</div>
                     </div>
                   </td>
 
-                  <td>11 April 2023</td>
+                  <td>{{booking.from_date}}</td>
 
-                  <td>11 April 2023</td>
+                  <td>{{booking.to_date}}</td>
 
-                  <td>2 People</td>
+                  <td>{{booking.no_of_persons}}</td>
 
-                  <td>$392.89</td>
+                  <td>₹ {{booking.amount}}</td>
 
-                  <td>
-                    <div class="circle text-purple-1">Approved</div>
-                  </td>
 
                   <td>
                     <div class="d-flex items-center">
-                      <button class="button -dark-1 size-35 bg-light-1 rounded-full flex-center">
-                        <i class="icon-pencil text-14"></i>
-                      </button>
+                      
+                      
 
-                      <button class="button -dark-1 size-35 bg-light-1 rounded-full flex-center ml-10">
+                      <button style='background-color:red !important;border:none;color:white' class="button -dark-1 size-35 bg-light-1 rounded-full flex-center ml-10" onclick="deleteConfirmation()">
                         <i class="icon-delete text-14"></i>
                       </button>
+
+                      <form action="{{ url_for('main.deletebooking') }}" method="post">
+                        <input type="hidden" name="booking_id" value="{{ booking.id }}">
+                       
+                      </form>
+
+                      <form action="{{ url_for('main.completebooking') }}" method="post" id="completeform">
+                        <input type="hidden" name="booking_id" value="{{ booking.id }}">
+                       
+                      </form>
+
+
+                      <button style='background-color:green !important;border:none;color:white;font-size:23px;' class="button -dark-1 size-35 bg-light-1 rounded-full flex-center ml-10" onclick="completeConfirmation()">
+                        <i class='bx bx-check' ></i>
+                      </button>
+
+                      
                     </div>
                   </td>
                 </tr>
 
-                <tr>
-                  <td>#484</td>
-
-                  <td class="min-w-300">
-                    <div class="d-flex items-center">
-                      <img src="img/dashboard/booking/2.jpg" alt="image">
-                      <div class="ml-20">Zipline 18 Platform and ATV Adventure Tour From Phuket</div>
-                    </div>
-                  </td>
-
-                  <td>11 April 2023</td>
-
-                  <td>11 April 2023</td>
-
-                  <td>2 People</td>
-
-                  <td>$392.89</td>
-
-                  <td>
-                    <div class="circle text-yellow-1">Pending</div>
-                  </td>
-
-                  <td>
-                    <div class="d-flex items-center">
-                      <button class="button -dark-1 size-35 bg-light-1 rounded-full flex-center">
-                        <i class="icon-pencil text-14"></i>
-                      </button>
-
-                      <button class="button -dark-1 size-35 bg-light-1 rounded-full flex-center ml-10">
-                        <i class="icon-delete text-14"></i>
-                      </button>
-                    </div>
-                  </td>
-                </tr>
-
-                <tr>
-                  <td>#484</td>
-
-                  <td class="min-w-300">
-                    <div class="d-flex items-center">
-                      <img src="img/dashboard/booking/3.jpg" alt="image">
-                      <div class="ml-20">Phang Nga Bay &amp; James Bond Island with Canoeing By Big Boat</div>
-                    </div>
-                  </td>
-
-                  <td>11 April 2023</td>
-
-                  <td>11 April 2023</td>
-
-                  <td>2 People</td>
-
-                  <td>$392.89</td>
-
-                  <td>
-                    <div class="circle text-red-2">Cancelled</div>
-                  </td>
-
-                  <td>
-                    <div class="d-flex items-center">
-                      <button class="button -dark-1 size-35 bg-light-1 rounded-full flex-center">
-                        <i class="icon-pencil text-14"></i>
-                      </button>
-
-                      <button class="button -dark-1 size-35 bg-light-1 rounded-full flex-center ml-10">
-                        <i class="icon-delete text-14"></i>
-                      </button>
-                    </div>
-                  </td>
-                </tr>
-
-                <tr>
-                  <td>#484</td>
-
-                  <td class="min-w-300">
-                    <div class="d-flex items-center">
-                      <img src="img/dashboard/booking/4.jpg" alt="image">
-                      <div class="ml-20">James Bond Island Tour from Phuket by Longtail Boat with Lunch</div>
-                    </div>
-                  </td>
-
-                  <td>11 April 2023</td>
-
-                  <td>11 April 2023</td>
-
-                  <td>2 People</td>
-
-                  <td>$392.89</td>
-
-                  <td>
-                    <div class="circle text-red-2">Cancelled</div>
-                  </td>
-
-                  <td>
-                    <div class="d-flex items-center">
-                      <button class="button -dark-1 size-35 bg-light-1 rounded-full flex-center">
-                        <i class="icon-pencil text-14"></i>
-                      </button>
-
-                      <button class="button -dark-1 size-35 bg-light-1 rounded-full flex-center ml-10">
-                        <i class="icon-delete text-14"></i>
-                      </button>
-                    </div>
-                  </td>
-                </tr>
-
-                <tr>
-                  <td>#484</td>
-
-                  <td class="min-w-300">
-                    <div class="d-flex items-center">
-                      <img src="img/dashboard/booking/5.jpg" alt="image">
-                      <div class="ml-20">Phuket City Tour: Karon View Point, Big Buddha &amp; Wat Chalong</div>
-                    </div>
-                  </td>
-
-                  <td>11 April 2023</td>
-
-                  <td>11 April 2023</td>
-
-                  <td>2 People</td>
-
-                  <td>$392.89</td>
-
-                  <td>
-                    <div class="circle text-red-2">Cancelled</div>
-                  </td>
-
-                  <td>
-                    <div class="d-flex items-center">
-                      <button class="button -dark-1 size-35 bg-light-1 rounded-full flex-center">
-                        <i class="icon-pencil text-14"></i>
-                      </button>
-
-                      <button class="button -dark-1 size-35 bg-light-1 rounded-full flex-center ml-10">
-                        <i class="icon-delete text-14"></i>
-                      </button>
-                    </div>
-                  </td>
-                </tr>
+                {% endfor %}
 
               </tbody>
             </table>
@@ -225,22 +125,16 @@
 
 
           <div class="pagination justify-center">
-            <button class="pagination__button button -accent-1 mr-15 -prev">
-              <i class="icon-arrow-left text-15"></i>
+            <button class="pagination__button button -accent-1 mr-15 -prev" id="prev-button">
+                <i class="icon-arrow-left text-15"></i>
             </button>
-
-            <div class="pagination__count">
-              <a href="#">1</a>
-              <a href="#" class="is-active">2</a>
-              <a href="#">3</a>
-              <a href="#">4</a>
-              <a href="#">5</a>
-              <div>...</div>
-              <a href="#">20</a>
+        
+            <div class="pagination__count" id="pagination-count">
+                <!-- pagination links will be generated here -->
             </div>
-
-            <button class="pagination__button button -accent-1 ml-15 -next">
-              <i class="icon-arrow-right text-15"></i>
+        
+            <button class="pagination__button button -accent-1 ml-15 -next" id="next-button">
+                <i class="icon-arrow-right text-15"></i>
             </button>
           </div>
 
@@ -248,420 +142,78 @@
 
         </div>
 
-        <div class="tabs__pane -tab-item-2 ">
-          <div class="overflowAuto">
-            <table class="tableTest mb-30">
-              <thead class="bg-light-1 rounded-12">
-                <tr>
-                  <th>ID</th>
-                  <th>Title</th>
-                  <th>Start date</th>
-                  <th>End date</th>
-                  <th>Details</th>
-                  <th>Price</th>
-                  <th>Status</th>
-                  <th>Action</th>
-                </tr>
-              </thead>
-
-              <tbody>
-
-                <tr>
-                  <td>#484</td>
-
-                  <td class="min-w-300">
-                    <div class="d-flex items-center">
-                      <img src="img/dashboard/booking/1.jpg" alt="image">
-                      <div class="ml-20">Phi Phi Islands Adventure Day Trip with Seaview Lunch by V. Marine Tour</div>
-                    </div>
-                  </td>
-
-                  <td>11 April 2023</td>
-
-                  <td>11 April 2023</td>
-
-                  <td>2 People</td>
-
-                  <td>$392.89</td>
-
-                  <td>
-                    <div class="circle text-purple-1">Approved</div>
-                  </td>
-
-                  <td>
-                    <div class="d-flex items-center">
-                      <button class="button -dark-1 size-35 bg-light-1 rounded-full flex-center">
-                        <i class="icon-pencil text-14"></i>
-                      </button>
-
-                      <button class="button -dark-1 size-35 bg-light-1 rounded-full flex-center ml-10">
-                        <i class="icon-delete text-14"></i>
-                      </button>
-                    </div>
-                  </td>
-                </tr>
-
-                <tr>
-                  <td>#484</td>
-
-                  <td class="min-w-300">
-                    <div class="d-flex items-center">
-                      <img src="img/dashboard/booking/2.jpg" alt="image">
-                      <div class="ml-20">Zipline 18 Platform and ATV Adventure Tour From Phuket</div>
-                    </div>
-                  </td>
-
-                  <td>11 April 2023</td>
-
-                  <td>11 April 2023</td>
-
-                  <td>2 People</td>
-
-                  <td>$392.89</td>
-
-                  <td>
-                    <div class="circle text-yellow-1">Pending</div>
-                  </td>
-
-                  <td>
-                    <div class="d-flex items-center">
-                      <button class="button -dark-1 size-35 bg-light-1 rounded-full flex-center">
-                        <i class="icon-pencil text-14"></i>
-                      </button>
-
-                      <button class="button -dark-1 size-35 bg-light-1 rounded-full flex-center ml-10">
-                        <i class="icon-delete text-14"></i>
-                      </button>
-                    </div>
-                  </td>
-                </tr>
-
-                <tr>
-                  <td>#484</td>
-
-                  <td class="min-w-300">
-                    <div class="d-flex items-center">
-                      <img src="img/dashboard/booking/3.jpg" alt="image">
-                      <div class="ml-20">Phang Nga Bay &amp; James Bond Island with Canoeing By Big Boat</div>
-                    </div>
-                  </td>
-
-                  <td>11 April 2023</td>
-
-                  <td>11 April 2023</td>
-
-                  <td>2 People</td>
-
-                  <td>$392.89</td>
-
-                  <td>
-                    <div class="circle text-red-2">Cancelled</div>
-                  </td>
-
-                  <td>
-                    <div class="d-flex items-center">
-                      <button class="button -dark-1 size-35 bg-light-1 rounded-full flex-center">
-                        <i class="icon-pencil text-14"></i>
-                      </button>
-
-                      <button class="button -dark-1 size-35 bg-light-1 rounded-full flex-center ml-10">
-                        <i class="icon-delete text-14"></i>
-                      </button>
-                    </div>
-                  </td>
-                </tr>
-
-                <tr>
-                  <td>#484</td>
-
-                  <td class="min-w-300">
-                    <div class="d-flex items-center">
-                      <img src="img/dashboard/booking/4.jpg" alt="image">
-                      <div class="ml-20">James Bond Island Tour from Phuket by Longtail Boat with Lunch</div>
-                    </div>
-                  </td>
-
-                  <td>11 April 2023</td>
-
-                  <td>11 April 2023</td>
-
-                  <td>2 People</td>
-
-                  <td>$392.89</td>
-
-                  <td>
-                    <div class="circle text-red-2">Cancelled</div>
-                  </td>
-
-                  <td>
-                    <div class="d-flex items-center">
-                      <button class="button -dark-1 size-35 bg-light-1 rounded-full flex-center">
-                        <i class="icon-pencil text-14"></i>
-                      </button>
-
-                      <button class="button -dark-1 size-35 bg-light-1 rounded-full flex-center ml-10">
-                        <i class="icon-delete text-14"></i>
-                      </button>
-                    </div>
-                  </td>
-                </tr>
-
-                <tr>
-                  <td>#484</td>
-
-                  <td class="min-w-300">
-                    <div class="d-flex items-center">
-                      <img src="img/dashboard/booking/5.jpg" alt="image">
-                      <div class="ml-20">Phuket City Tour: Karon View Point, Big Buddha &amp; Wat Chalong</div>
-                    </div>
-                  </td>
-
-                  <td>11 April 2023</td>
-
-                  <td>11 April 2023</td>
-
-                  <td>2 People</td>
-
-                  <td>$392.89</td>
-
-                  <td>
-                    <div class="circle text-red-2">Cancelled</div>
-                  </td>
-
-                  <td>
-                    <div class="d-flex items-center">
-                      <button class="button -dark-1 size-35 bg-light-1 rounded-full flex-center">
-                        <i class="icon-pencil text-14"></i>
-                      </button>
-
-                      <button class="button -dark-1 size-35 bg-light-1 rounded-full flex-center ml-10">
-                        <i class="icon-delete text-14"></i>
-                      </button>
-                    </div>
-                  </td>
-                </tr>
-
-              </tbody>
-            </table>
-          </div>
-
-
-          <div class="pagination justify-center">
-            <button class="pagination__button button -accent-1 mr-15 -prev">
-              <i class="icon-arrow-left text-15"></i>
-            </button>
-
-            <div class="pagination__count">
-              <a href="#">1</a>
-              <a href="#" class="is-active">2</a>
-              <a href="#">3</a>
-              <a href="#">4</a>
-              <a href="#">5</a>
-              <div>...</div>
-              <a href="#">20</a>
-            </div>
-
-            <button class="pagination__button button -accent-1 ml-15 -next">
-              <i class="icon-arrow-right text-15"></i>
-            </button>
-          </div>
-
-          <div class="text-14 text-center mt-20">Showing results 1-30 of 1,415</div>
-
-        </div>
+  
 
         <div class="tabs__pane -tab-item-3 ">
           <div class="overflowAuto">
             <table class="tableTest mb-30">
               <thead class="bg-light-1 rounded-12">
                 <tr>
+                  <th>S.No</th>
                   <th>ID</th>
                   <th>Title</th>
                   <th>Start date</th>
                   <th>End date</th>
-                  <th>Details</th>
+                  <th>Persons</th>
                   <th>Price</th>
-                  <th>Status</th>
+                 
                   <th>Action</th>
                 </tr>
               </thead>
 
               <tbody>
-
+                {% for booking in Complete_bookings|reverse %}
                 <tr>
-                  <td>#484</td>
+                  <td>{{ loop.index }}</td>
+
+                  <td style="color:#18d30e;">#000{{booking.id}}</td>
 
                   <td class="min-w-300">
                     <div class="d-flex items-center">
-                      <img src="img/dashboard/booking/1.jpg" alt="image">
-                      <div class="ml-20">Phi Phi Islands Adventure Day Trip with Seaview Lunch by V. Marine Tour</div>
+
+                      <div class="ml-20">{{booking.destination}}</div>
                     </div>
                   </td>
 
-                  <td>11 April 2023</td>
+                  <td>{{booking.from_date}}</td>
 
-                  <td>11 April 2023</td>
+                  <td>{{booking.to_date}}</td>
 
-                  <td>2 People</td>
+                  <td>{{booking.no_of_persons}}</td>
 
-                  <td>$392.89</td>
+                  <td>₹ {{booking.amount}}</td>
 
-                  <td>
-                    <div class="circle text-purple-1">Approved</div>
-                  </td>
 
                   <td>
                     <div class="d-flex items-center">
-                      <button class="button -dark-1 size-35 bg-light-1 rounded-full flex-center">
-                        <i class="icon-pencil text-14"></i>
-                      </button>
+                      
+                      
 
-                      <button class="button -dark-1 size-35 bg-light-1 rounded-full flex-center ml-10">
+                      <button style='background-color:red !important;border:none;color:white' class="button -dark-1 size-35 bg-light-1 rounded-full flex-center ml-10" onclick="deleteConfirmation()">
                         <i class="icon-delete text-14"></i>
                       </button>
+
+                      <form action="{{ url_for('main.deletebooking') }}" method="post">
+                        <input type="hidden" name="booking_id" value="{{ booking.id }}">
+                       
+                      </form>
+
+                      <form action="{{ url_for('main.completebooking') }}" method="post" id="completeform">
+                        <input type="hidden" name="booking_id" value="{{ booking.id }}">
+                       
+                      </form>
+
+
+                      <button style='background-color:green !important;border:none;color:white;font-size:23px;' class="button -dark-1 size-35 bg-light-1 rounded-full flex-center ml-10" onclick="completeConfirmation()">
+                        <i class='bx bx-check' ></i>
+                      </button>
+
+                      
                     </div>
                   </td>
                 </tr>
 
-                <tr>
-                  <td>#484</td>
-
-                  <td class="min-w-300">
-                    <div class="d-flex items-center">
-                      <img src="img/dashboard/booking/2.jpg" alt="image">
-                      <div class="ml-20">Zipline 18 Platform and ATV Adventure Tour From Phuket</div>
-                    </div>
-                  </td>
-
-                  <td>11 April 2023</td>
-
-                  <td>11 April 2023</td>
-
-                  <td>2 People</td>
-
-                  <td>$392.89</td>
-
-                  <td>
-                    <div class="circle text-yellow-1">Pending</div>
-                  </td>
-
-                  <td>
-                    <div class="d-flex items-center">
-                      <button class="button -dark-1 size-35 bg-light-1 rounded-full flex-center">
-                        <i class="icon-pencil text-14"></i>
-                      </button>
-
-                      <button class="button -dark-1 size-35 bg-light-1 rounded-full flex-center ml-10">
-                        <i class="icon-delete text-14"></i>
-                      </button>
-                    </div>
-                  </td>
-                </tr>
-
-                <tr>
-                  <td>#484</td>
-
-                  <td class="min-w-300">
-                    <div class="d-flex items-center">
-                      <img src="img/dashboard/booking/3.jpg" alt="image">
-                      <div class="ml-20">Phang Nga Bay &amp; James Bond Island with Canoeing By Big Boat</div>
-                    </div>
-                  </td>
-
-                  <td>11 April 2023</td>
-
-                  <td>11 April 2023</td>
-
-                  <td>2 People</td>
-
-                  <td>$392.89</td>
-
-                  <td>
-                    <div class="circle text-red-2">Cancelled</div>
-                  </td>
-
-                  <td>
-                    <div class="d-flex items-center">
-                      <button class="button -dark-1 size-35 bg-light-1 rounded-full flex-center">
-                        <i class="icon-pencil text-14"></i>
-                      </button>
-
-                      <button class="button -dark-1 size-35 bg-light-1 rounded-full flex-center ml-10">
-                        <i class="icon-delete text-14"></i>
-                      </button>
-                    </div>
-                  </td>
-                </tr>
-
-                <tr>
-                  <td>#484</td>
-
-                  <td class="min-w-300">
-                    <div class="d-flex items-center">
-                      <img src="img/dashboard/booking/4.jpg" alt="image">
-                      <div class="ml-20">James Bond Island Tour from Phuket by Longtail Boat with Lunch</div>
-                    </div>
-                  </td>
-
-                  <td>11 April 2023</td>
-
-                  <td>11 April 2023</td>
-
-                  <td>2 People</td>
-
-                  <td>$392.89</td>
-
-                  <td>
-                    <div class="circle text-red-2">Cancelled</div>
-                  </td>
-
-                  <td>
-                    <div class="d-flex items-center">
-                      <button class="button -dark-1 size-35 bg-light-1 rounded-full flex-center">
-                        <i class="icon-pencil text-14"></i>
-                      </button>
-
-                      <button class="button -dark-1 size-35 bg-light-1 rounded-full flex-center ml-10">
-                        <i class="icon-delete text-14"></i>
-                      </button>
-                    </div>
-                  </td>
-                </tr>
-
-                <tr>
-                  <td>#484</td>
-
-                  <td class="min-w-300">
-                    <div class="d-flex items-center">
-                      <img src="img/dashboard/booking/5.jpg" alt="image">
-                      <div class="ml-20">Phuket City Tour: Karon View Point, Big Buddha &amp; Wat Chalong</div>
-                    </div>
-                  </td>
-
-                  <td>11 April 2023</td>
-
-                  <td>11 April 2023</td>
-
-                  <td>2 People</td>
-
-                  <td>$392.89</td>
-
-                  <td>
-                    <div class="circle text-red-2">Cancelled</div>
-                  </td>
-
-                  <td>
-                    <div class="d-flex items-center">
-                      <button class="button -dark-1 size-35 bg-light-1 rounded-full flex-center">
-                        <i class="icon-pencil text-14"></i>
-                      </button>
-
-                      <button class="button -dark-1 size-35 bg-light-1 rounded-full flex-center ml-10">
-                        <i class="icon-delete text-14"></i>
-                      </button>
-                    </div>
-                  </td>
-                </tr>
+                {% endfor %}
 
               </tbody>
             </table>
@@ -669,27 +221,19 @@
 
 
           <div class="pagination justify-center">
-            <button class="pagination__button button -accent-1 mr-15 -prev">
-              <i class="icon-arrow-left text-15"></i>
+            <button class="pagination__button button -accent-1 mr-15 -prev" id="prev-button">
+                <i class="icon-arrow-left text-15"></i>
             </button>
-
-            <div class="pagination__count">
-              <a href="#">1</a>
-              <a href="#" class="is-active">2</a>
-              <a href="#">3</a>
-              <a href="#">4</a>
-              <a href="#">5</a>
-              <div>...</div>
-              <a href="#">20</a>
+        
+            <div class="pagination__count" id="pagination-count">
+                <!-- pagination links will be generated here -->
             </div>
-
-            <button class="pagination__button button -accent-1 ml-15 -next">
-              <i class="icon-arrow-right text-15"></i>
+        
+            <button class="pagination__button button -accent-1 ml-15 -next" id="next-button">
+                <i class="icon-arrow-right text-15"></i>
             </button>
           </div>
-
-          <div class="text-14 text-center mt-20">Showing results 1-30 of 1,415</div>
-
+         
         </div>
 
       </div>
@@ -701,6 +245,143 @@
   </div>
 
 </div>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+<script>
+  function deleteConfirmation() {
+    Swal.fire({
+      title: 'Are you sure?',
+      text: 'You will not be able to recover this item!',
+      imageUrl: 'https://media.istockphoto.com/id/1384436815/vector/people-cleaning-mobile-phone-from-trash-files.jpg?s=612x612&w=0&k=20&c=Wb0Czc_fh1Rf7mZuxMa5pzwjn_H_Qajk6u-Fvxot9rU=',
+      imageWidth: 400,
+      imageHeight: 200,
+      showCancelButton: true,
+      confirmButtonText: 'Yes, delete it!',
+      cancelButtonText: 'No, cancel!',
+      reverseButtons: true
+    }).then((result) => {
+      if (result.isConfirmed) {
 
+        // Submit the form
+        document.querySelector('form').submit();
+      }
+    });
+  }
 
+  
+  function completeConfirmation() {
+    Swal.fire({
+      title: 'Are you sure?',
+      text: 'Change to Completed..',
+      imageUrl: 'https://i.giphy.com/PijzuUzUhm7hcWinGn.webp',
+      imageWidth: 400,
+      imageHeight: 300,
+      showCancelButton: true,
+      confirmButtonText: 'Yes, complete it!',
+      cancelButtonText: 'No, cancel!',
+      reverseButtons: true
+    }).then((result) => {
+      if (result.isConfirmed) {
+  
+        // Submit the form
+        document.getElementById('completeform').submit();
+      }
+    });
+  }
+
+</script>
+<script>
+  document.addEventListener('DOMContentLoaded', function() {
+    // Function to paginate tables
+    function paginateTables() {
+        const tables = document.querySelectorAll('.tableTest');
+        
+        tables.forEach(table => {
+            const tbody = table.querySelector('tbody');
+            const rows = Array.from(tbody.querySelectorAll('tr'));
+            const itemsPerPage = 10;
+            let currentPage = 1;
+
+            // Function to display rows for current page
+            function displayPage(page) {
+                const start = (page - 1) * itemsPerPage;
+                const end = start + itemsPerPage;
+
+                rows.forEach((row, index) => {
+                    row.style.display = (index >= start && index < end) ? '' : 'none';
+                });
+
+                updatePaginationControls(page, Math.ceil(rows.length / itemsPerPage));
+            }
+
+            // Function to update pagination controls
+            function updatePaginationControls(currentPage, totalPages) {
+                const paginationContainer = table.closest('.tabs__pane').querySelector('.pagination');
+                const paginationCount = paginationContainer.querySelector('.pagination__count');
+                
+                // Clear existing pagination links
+                paginationCount.innerHTML = '';
+
+                // Add page numbers
+                let pageNumbers = [];
+                if (totalPages <= 5) {
+                    pageNumbers = Array.from({length: totalPages}, (_, i) => i + 1);
+                } else {
+                    if (currentPage <= 3) {
+                        pageNumbers = [1, 2, 3, 4, '...', totalPages];
+                    } else if (currentPage >= totalPages - 2) {
+                        pageNumbers = [1, '...', totalPages - 3, totalPages - 2, totalPages - 1, totalPages];
+                    } else {
+                        pageNumbers = [1, '...', currentPage - 1, currentPage, currentPage + 1, '...', totalPages];
+                    }
+                }
+
+                pageNumbers.forEach(pageNum => {
+                    if (pageNum === '...') {
+                        const ellipsis = document.createElement('div');
+                        ellipsis.textContent = '...';
+                        paginationCount.appendChild(ellipsis);
+                    } else {
+                        const pageLink = document.createElement('a');
+                        pageLink.href = '#';
+                        pageLink.textContent = pageNum;
+                        if (pageNum === currentPage) {
+                            pageLink.classList.add('is-active');
+                        }
+                        pageLink.addEventListener('click', function(e) {
+                            e.preventDefault();
+                            displayPage(pageNum);
+                        });
+                        paginationCount.appendChild(pageLink);
+                    }
+                });
+
+                // Previous button
+                const prevButton = paginationContainer.querySelector('.-prev');
+                prevButton.disabled = currentPage === 1;
+                prevButton.addEventListener('click', function() {
+                    if (currentPage > 1) {
+                        displayPage(currentPage - 1);
+                    }
+                });
+
+                // Next button
+                const nextButton = paginationContainer.querySelector('.-next');
+                nextButton.disabled = currentPage === totalPages;
+                nextButton.addEventListener('click', function() {
+                    if (currentPage < totalPages) {
+                        displayPage(currentPage + 1);
+                    }
+                });
+            }
+
+            // Initial display
+            displayPage(1);
+        });
+    }
+
+    // Run pagination
+    paginateTables();
+});
+
+</script>
 {% endblock content %}

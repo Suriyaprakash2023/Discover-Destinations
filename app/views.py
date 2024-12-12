@@ -114,12 +114,23 @@ def dashboard():
     # Query to count the number of destinations added in the last 3 days
     recent_destination_count = Destination.query.filter(Destination.created_at >= three_days_ago).count()
 
-    return render_template('dashboard/dashboard_index.html',destination_count=destination_count,recent_destination_count=recent_destination_count)
 
-@main.route('/bookings')
-def bookings():
+    complete_bookings = DestinationBooking.query.filter_by(status='Complete').all()
+    complete_bookings_count = len(complete_bookings)
 
-    return render_template('dashboard/booking.html')
+    pendding_bookings = DestinationBooking.query.filter_by(status='Pendding').all()
+    pendding_bookings_count = len(pendding_bookings)
+
+    bookings = DestinationBooking.query.filter_by(status='Complete').all()
+    total_amount = sum(booking.amount for booking in bookings)
+    return render_template('dashboard/dashboard_index.html',
+                           destination_count=destination_count,
+                           recent_destination_count=recent_destination_count,
+                           complete_bookings_count = complete_bookings_count,
+                          pendding_bookings_count = pendding_bookings_count,
+                           total_amount = total_amount
+                           )
+
 
 @main.route('/listing')
 def listing():
@@ -267,27 +278,75 @@ def logout():
     return redirect(url_for('main.index'))  # Redirect to home page after logout
 
 
-@main.route('/booking')
+@main.route('/booking',methods=['POST','GET'])
 @login_required
 def booking():
     if request.method == 'POST':
         destination_id = request.form.get('destination_id')
         from_date = request.form.get('from_date')
         to_date = request.form.get('to_date')
-        no_of_persons = request.form.get('no_of_persons')
+        no_of_persons = request.form.get('noofperson')
         amount = request.form.get('amount')
-        
-        print(destination_id,from_date,to_date,no_of_persons,amount,"amount")
-        # new_booking = DestinationBooking(
-        # destination_id=destination.id,
-        # user_id=current_user.id,
-        # from_date=datetime(2024, 7, 1),
-        # to_date=datetime(2024, 7, 10),
-        # no_of_persons=2,
-        # amount=1500.00
-        # )
-        # db.session.add(new_booking)
-        # db.session.commit()
+        destination = Destination.query.get_or_404(destination_id) #destination_id
+        if DestinationBooking.check_existing_booking(current_user.id, destination_id, from_date, to_date):
+            flash(f'Your Tour Alredy Booked Contact Admin...!', 'error')
+            return render_template('destination_detail.html',destination=destination)
+        else:
 
-        destination = Destination.query.get_or_404(1) #destination_id
-        return render_template('destination_detail.html',destination=destination)
+            new_booking = DestinationBooking(
+            destination_id=destination_id,
+            user_id=current_user.id,
+            from_date=datetime.strptime(from_date, '%Y-%m-%d').date(),
+            to_date=datetime.strptime(to_date, '%Y-%m-%d').date(),
+            no_of_persons=no_of_persons,
+            amount=amount
+            )
+            db.session.add(new_booking)
+            db.session.commit()
+
+            
+            flash(f'Tour Booked Enjoy Your Tour...!', 'success')
+            return render_template('destination_detail.html',destination=destination)
+
+
+@main.route('/bookings')
+def bookings():
+    
+    Pendding_bookings = DestinationBooking.query.filter(DestinationBooking.status=='Pendding').all()
+    Complete_bookings = DestinationBooking.query.filter(DestinationBooking.status == 'Complete').all()
+
+    return render_template('dashboard/booking.html',Pendding_bookings=Pendding_bookings,Complete_bookings=Complete_bookings)
+
+
+@main.route('/deletebooking', methods=['POST'])
+@login_required
+def deletebooking():
+    booking_id = request.form.get('booking_id')
+    # Delete the booking
+    booking = DestinationBooking.query.get_or_404(booking_id)
+    db.session.delete(booking)
+    db.session.commit()
+    flash(f'Booking Deleted Successfully...!', 'success')
+
+    Pendding_bookings = DestinationBooking.query.filter(DestinationBooking.status=='Pendding').all()
+    Complete_bookings = DestinationBooking.query.filter(DestinationBooking.status == 'Complete').all()
+
+    return render_template('dashboard/booking.html',Pendding_bookings=Pendding_bookings,Complete_bookings=Complete_bookings)
+
+
+@main.route('/completebooking', methods=['POST'])
+@login_required
+def completebooking():
+    booking_id = request.form.get('booking_id')
+    # Delete the booking
+    booking = DestinationBooking.query.get_or_404(booking_id)
+    booking.status = 'Complete'
+    db.session.commit()
+    flash(f'Booking Completed Successfully...!', 'success')
+
+    Pendding_bookings = DestinationBooking.query.filter(DestinationBooking.status=='Pendding').all()
+    Complete_bookings = DestinationBooking.query.filter(DestinationBooking.status == 'Complete').all()
+
+    return render_template('dashboard/booking.html',Pendding_bookings=Pendding_bookings,Complete_bookings=Complete_bookings)
+
+    

@@ -66,6 +66,24 @@
   </div>
 </header>
 
+{% with messages = get_flashed_messages(with_categories=True) %}
+{% if messages %}
+  <div id="flash-messages">
+    {% for category, message in messages %}
+      {% if category == 'success' %}
+        <div class="alert alert-success" style="color: #fff;background-color: #05a35c;width:50%;margin-top:20px;margin-left:auto;margin-right:auto;" role="alert">
+          {{ message }}
+        </div>
+      {% elif category == 'error' %}
+          <div class="alert alert-danger" style="color: #fff;background-color: #ff1919c9;width:50%;margin-top:20px;margin-left:auto;margin-right:auto;" role="alert">
+            {{message}}
+          </div>
+        
+      {% endif %}
+    {% endfor %}
+  </div>
+{% endif %}
+{% endwith %}
 
 
 <!-- Modal Structure -->
@@ -80,7 +98,7 @@
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
       <div class="modal-body"style= "width:80vh"  >
-        <form action="/booking" method="POST" class="contact-form style2 ajax-contact">
+        <form action="/booking" method="POST" class="">
           <div class="row">
             <div class="col-12 form-group">
               <label>From Date</label>
@@ -89,7 +107,7 @@
                 class="form-control"
                 name="from_date"
                 id="from_date"
-               
+               required
               />
             </div>
             <div class="col-12 form-group">
