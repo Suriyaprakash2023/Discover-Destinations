@@ -13,4 +13,4 @@ def load_user(user_id):
     return User.query.get(int(user_id))  # Query the user by ID
 
 if __name__ == '__main__':
-    app.run(debug=True, port=8989)  # Start the app
+    app.run(debug=True)  # Start the app
