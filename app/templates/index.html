@@ -13,8 +13,8 @@
           <div class="swiper-slide">
             <div class="hero-inner">
               <div
-                class="th-hero-bg"
-                data-bg-src="static/img/hero/hero_bg_1_1.jpg"
+                class="th-hero-bg"  
+                data-bg-src="{{ url_for('static', filename='img/hero/hero_bg_1_1.jpg') }}"
               ></div>
               <div class="container">
                 <div class="hero-style1">
@@ -48,8 +48,8 @@
           <div class="swiper-slide">
             <div class="hero-inner">
               <div
-                class="th-hero-bg"
-                data-bg-src="static/img/hero/hero_bg_1_2.jpg"
+                class="th-hero-bg" 
+                data-bg-src="{{ url_for('static', filename='img/hero/hero_bg_1_2.jpg') }}"
               ></div>
               <div class="container">
                 <div class="hero-style1">
@@ -84,7 +84,7 @@
             <div class="hero-inner">
               <div
                 class="th-hero-bg"
-                data-bg-src="static/img/hero/hero_bg_1_3.jpg"
+                data-bg-src="{{ url_for('static', filename='img/hero/hero_bg_1_3.jpg') }}"
               ></div>
               <div class="container">
                 <div class="hero-style1">
@@ -121,14 +121,14 @@
             data-slider-prev="#heroSlide1"
             class="slider-arrow slider-prev"
           >
-            <img src="static/img/icon/right-arrow.svg" alt="" />
+            <img src=" {{ url_for('static', filename='img/icon/right-arrow.svg') }}" alt="" />
           </button>
           <div class="slider-pagination"></div>
           <button
             data-slider-next="#heroSlide1"
             class="slider-arrow slider-next"
           >
-            <img src="static/img/icon/left-arrow.svg" alt="" />
+            <img src="{{ url_for('static', filename='img/icon/left-arrow.svg') }}" alt="" />
           </button>
         </div>
       </div>
@@ -234,7 +234,7 @@
               </div>
               <div class="form-btn col-md-12 col-lg-auto">
                 <button class="th-btn">
-                  <img src="static/img/icon/search.svg" alt="" />Search
+                  <img src="{{ url_for('static', filename='img/icon/search.svg') }}" alt="" />Search
                 </button>
               </div>
             </div>
@@ -245,7 +245,7 @@
     </div>
     <section
       class="category-area bg-top-center"
-      data-bg-src="static/img/bg/category_bg_1.png"
+      data-bg-src="{{ url_for('static', filename='img/bg/category_bg_1.png') }}"
     >
       <div class="container th-container">
         <div class="title-area text-center">
@@ -257,7 +257,7 @@
             <div class="swiper-slide">
               <div class="category-card single">
                 <div class="box-img global-img">
-                  <img src="static/img/category/category_1_1.jpg" alt="Image" />
+                  <img src="{{ url_for('static', filename='img/category/category_1_1.jpg') }}" alt="Image" />
                 </div>
                 <h3 class="box-title">
                   <a >Cruises</a>
@@ -268,7 +268,7 @@
             <div class="swiper-slide">
               <div class="category-card single">
                 <div class="box-img global-img">
-                  <img src="static/img/category/category_1_2.jpg" alt="Image" />
+                  <img src="{{ url_for('static', filename='img/category/category_1_2.jpg') }}" alt="Image" />
                 </div>
                 <h3 class="box-title"><a >Hiking</a></h3>
                 <a class="line-btn" >See more</a>
@@ -277,7 +277,7 @@
             <div class="swiper-slide">
               <div class="category-card single">
                 <div class="box-img global-img">
-                  <img src="static/img/category/category_1_3.jpg" alt="Image" />
+                  <img src="{{ url_for('static', filename='img/category/category_1_3.jpg') }}" alt="Image" />
                 </div>
                 <h3 class="box-title">
                   <a >Airbirds</a>
@@ -288,7 +288,7 @@
             <div class="swiper-slide">
               <div class="category-card single">
                 <div class="box-img global-img">
-                  <img src="static/img/category/category_1_4.jpg" alt="Image" />
+                  <img src="{{ url_for('static', filename='img/category/category_1_4.jpg') }}" alt="Image" />
                 </div>
                 <h3 class="box-title">
                   <a >Wildlife</a>
@@ -299,7 +299,7 @@
             <div class="swiper-slide">
               <div class="category-card single">
                 <div class="box-img global-img">
-                  <img src="static/img/category/category_1_5.jpg" alt="Image" />
+                  <img src="{{ url_for('static', filename='img/category/category_1_5.jpg') }}" alt="Image" />
                 </div>
                 <h3 class="box-title">
                   <a >Walking</a>
@@ -310,7 +310,7 @@
             <div class="swiper-slide">
               <div class="category-card single">
                 <div class="box-img global-img">
-                  <img src="static/img/category/category_1_1.jpg" alt="Image" />
+                  <img src="{{ url_for('static', filename='img/category/category_1_1.jpg') }}" alt="Image" />
                 </div>
                 <h3 class="box-title">
                   <a >Cruises</a>
@@ -321,7 +321,7 @@
             <div class="swiper-slide">
               <div class="category-card single">
                 <div class="box-img global-img">
-                  <img src="static/img/category/category_1_2.jpg" alt="Image" />
+                  <img src="{{ url_for('static', filename='img/category/category_1_2.jpg') }}" alt="Image" />
                 </div>
                 <h3 class="box-title"><a >Hiking</a></h3>
                 <a class="line-btn" >See more</a>
@@ -330,7 +330,7 @@
             <div class="swiper-slide">
               <div class="category-card single">
                 <div class="box-img global-img">
-                  <img src="static/img/category/category_1_3.jpg" alt="Image" />
+                  <img src="{{ url_for('static', filename='img/category/category_1_3.jpg') }}" alt="Image" />
                 </div>
                 <h3 class="box-title">
                   <a >Airbirds</a>
@@ -341,7 +341,7 @@
             <div class="swiper-slide">
               <div class="category-card single">
                 <div class="box-img global-img">
-                  <img src="static/img/category/category_1_4.jpg" alt="Image" />
+                  <img src="{{ url_for('static', filename='img/category/category_1_4.jpg') }}" alt="Image" />
                 </div>
                 <h3 class="box-title">
                   <a >Wildlife</a>
@@ -352,7 +352,7 @@
             <div class="swiper-slide">
               <div class="category-card single">
                 <div class="box-img global-img">
-                  <img src="static/img/category/category_1_5.jpg" alt="Image" />
+                  <img src"{{ url_for('static', filename='img/category/category_1_5.jpg') }}" alt="Image" />
                 </div>
                 <h3 class="box-title">
                   <a >Walking</a>
@@ -363,7 +363,7 @@
             <div class="swiper-slide">
               <div class="category-card single">
                 <div class="box-img global-img">
-                  <img src="static/img/category/category_1_1.jpg" alt="Image" />
+                  <img src="{{ url_for('static', filename='img/category/category_1_1.jpg') }}" alt="Image" />
                 </div>
                 <h3 class="box-title">
                   <a >Cruises</a>
@@ -374,7 +374,7 @@
             <div class="swiper-slide">
               <div class="category-card single">
                 <div class="box-img global-img">
-                  <img src="static/img/category/category_1_2.jpg" alt="Image" />
+                  <img src="{{ url_for('static', filename='img/category/category_1_2.jpg') }}" alt="Image" />
                 </div>
                 <h3 class="box-title"><a >Hiking</a></h3>
                 <a class="line-btn" >See more</a>
@@ -383,7 +383,7 @@
             <div class="swiper-slide">
               <div class="category-card single">
                 <div class="box-img global-img">
-                  <img src="static/img/category/category_1_3.jpg" alt="Image" />
+                  <img src="{{ url_for('static', filename='img/category/category_1_3.jpg') }}" alt="Image" />
                 </div>
                 <h3 class="box-title">
                   <a >Airbirds</a>
@@ -394,7 +394,7 @@
             <div class="swiper-slide">
               <div class="category-card single">
                 <div class="box-img global-img">
-                  <img src="static/img/category/category_1_4.jpg" alt="Image" />
+                  <img src="{{ url_for('static', filename='img/category/category_1_4.jpg') }}" alt="Image" />
                 </div>
                 <h3 class="box-title">
                   <a >Wildlife</a>
@@ -405,7 +405,7 @@
             <div class="swiper-slide">
               <div class="category-card single">
                 <div class="box-img global-img">
-                  <img src="static/img/category/category_1_5.jpg" alt="Image" />
+                  <img src="{{ url_for('static', filename='img/category/category_1_5.jpg') }}" alt="Image" />
                 </div>
                 <h3 class="box-title">
                   <a >Walking</a>
@@ -434,7 +434,7 @@
               <div class="destination-box gsap-cursor">
                 <div class="destination-img">
                   <img
-                    src="static/img/destination/destination_1_1.jpg"
+                    src="{{ url_for('static', filename='img/destination/destination_1_1.jpg') }}"
                     alt="destination image"
                   />
                   <div class="destination-content">
@@ -459,7 +459,7 @@
               <div class="destination-box gsap-cursor">
                 <div class="destination-img">
                   <img
-                    src="static/img/destination/destination_1_2.jpg"
+                    src="{{ url_for('static', filename='img/destination/destination_1_2.jpg') }}"
                     alt="destination image"
                   />
                   <div class="destination-content">
@@ -484,7 +484,7 @@
               <div class="destination-box gsap-cursor">
                 <div class="destination-img">
                   <img
-                    src="static/img/destination/destination_1_3.jpg"
+                    src="{{ url_for('static', filename='img/destination/destination_1_3.jpg') }}"
                     alt="destination image"
                   />
                   <div class="destination-content">
@@ -509,7 +509,7 @@
               <div class="destination-box gsap-cursor">
                 <div class="destination-img">
                   <img
-                    src="static/img/destination/destination_1_4.jpg"
+                    src="{{ url_for('static', filename='img/destination/destination_1_4.jpg') }}"
                     alt="destination image"
                   />
                   <div class="destination-content">
@@ -534,7 +534,7 @@
               <div class="destination-box gsap-cursor">
                 <div class="destination-img">
                   <img
-                    src="static/img/destination/destination_1_5.jpg"
+                    src="{{ url_for('static', filename='img/destination/destination_1_5.jpg') }}"
                     alt="destination image"
                   />
                   <div class="destination-content">
@@ -559,7 +559,7 @@
               <div class="destination-box gsap-cursor">
                 <div class="destination-img">
                   <img
-                    src="static/img/destination/destination_1_1.jpg"
+                    src="{{ url_for('static', filename='img/destination/destination_1_1.jpg') }}"
                     alt="destination image"
                   />
                   <div class="destination-content">
@@ -584,7 +584,7 @@
               <div class="destination-box gsap-cursor">
                 <div class="destination-img">
                   <img
-                    src="static/img/destination/destination_1_2.jpg"
+                    src="{{ url_for('static', filename='img/destination/destination_1_2.jpg') }}"
                     alt="destination image"
                   />
                   <div class="destination-content">
@@ -609,7 +609,7 @@
               <div class="destination-box gsap-cursor">
                 <div class="destination-img">
                   <img
-                    src="static/img/destination/destination_1_3.jpg"
+                    src="{{ url_for('static', filename='img/destination/destination_1_3.jpg') }}"
                     alt="destination image"
                   />
                   <div class="destination-content">
@@ -634,7 +634,7 @@
               <div class="destination-box gsap-cursor">
                 <div class="destination-img">
                   <img
-                    src="static/img/destination/destination_1_4.jpg"
+                    src="{{ url_for('static', filename='img/destination/destination_1_4.jpg') }}"
                     alt="destination image"
                   />
                   <div class="destination-content">
@@ -659,7 +659,7 @@
               <div class="destination-box gsap-cursor">
                 <div class="destination-img">
                   <img
-                    src="static/img/destination/destination_1_5.jpg"
+                    src="{{ url_for('static', filename='img/destination/destination_1_5.jpg') }}"
                     alt="destination image"
                   />
                   <div class="destination-content">
@@ -693,13 +693,13 @@
           <div class="col-xl-6">
             <div class="img-box1">
               <div class="img1">
-                <img src="static/img/normal/about_1_1.jpg" alt="About" />
+                <img src="{{ url_for('static', filename='img/normal/about_1_1.jpg') }}" alt="About" />
               </div>
               <div class="img2">
-                <img src="static/img/normal/about_1_2.jpg" alt="About" />
+                <img src="{{ url_for('static', filename='img/normal/about_1_2.jpg') }}" alt="About" />
               </div>
               <div class="img3">
-                <img src="static/img/normal/about_1_3.jpg" alt="About" />
+                <img src="{{ url_for('static', filename='img/normal/about_1_3.jpg') }}" alt="About" />
               </div>
             </div>
           </div>
@@ -719,7 +719,7 @@
               <div class="about-item-wrap">
                 <div class="about-item">
                   <div class="about-item_img">
-                    <img src="static/img/icon/map3.svg" alt="" />
+                    <img src="{{ url_for('static', filename='img/icon/map3.svg') }}" alt="" />
                   </div>
                   <div class="about-item_centent">
                     <h5 class="box-title">Exclusive Trip</h5>
@@ -731,7 +731,7 @@
                 </div>
                 <div class="about-item">
                   <div class="about-item_img">
-                    <img src="static/img/icon/guide.svg" alt="" />
+                    <img src="{{ url_for('static', filename='img/icon/guide.svg') }}" alt="" />
                   </div>
                   <div class="about-item_centent">
                     <h5 class="box-title">Professional Guide</h5>
@@ -756,28 +756,28 @@
         data-top="12%"
         data-left="2%"
       >
-        <img src="static/img/shape/shape_1.png" alt="shape" />
+        <img src="{{ url_for('static', filename='img/shape/shape_1.png') }}" alt="shape" />
       </div>
       <div
         class="shape-mockup shape2 d-none d-xl-block"
         data-top="20%"
         data-left="3%"
       >
-        <img src="static/img/shape/shape_2.png" alt="shape" />
+        <img src="{{ url_for('static', filename='img/shape/shape_2.png') }}" alt="shape" />
       </div>
       <div
         class="shape-mockup shape3 d-none d-xl-block"
         data-top="14%"
         data-left="8%"
       >
-        <img src="static/img/shape/shape_3.png" alt="shape" />
+        <img src="{{ url_for('static', filename='img/shape/shape_3.png') }}" alt="shape" />
       </div>
       <div
         class="shape-mockup about-shape movingX d-none d-xxl-block"
         data-bottom="0%"
         data-right="8%"
       >
-        <img src="static/img/normal/about-slide-img.png" alt="shape" />
+        <img src="{{ url_for('static', filename='img/normal/about-slide-img.png') }}" alt="shape" />
       </div>
       <div
         class="shape-mockup about-rating d-none d-xxl-block"
@@ -791,13 +791,13 @@
         data-bottom="25%"
         data-right="22%"
       >
-        <img src="static/img/icon/emoji.png" alt="" />
+        <img src="{{ url_for('static', filename='img/icon/emoji.png') }}" alt="" />
       </div>
     </div>
     <section
       class="position-relative bg-top-center overflow-hidden space"
       id="service-sec"
-      data-bg-src="static/img/bg/tour_bg_1.jpg"
+      data-bg-src="{{ url_for('static', filename='img/bg/tour_bg_1.jpg') }}"
     >
       <div class="container">
         <div class="row">
@@ -821,7 +821,7 @@
               <div class="swiper-slide">
                 <div class="tour-box th-ani gsap-cursor">
                   <div class="tour-box_img global-img">
-                    <img src="static/img/tour/tour_box_1.jpg" alt="image" />
+                    <img src="{{ url_for('static', filename='img/tour/tour_box_1.jpg') }}" alt="image" />
                   </div>
                   <div class="tour-content">
                     <h3 class="box-title">
@@ -860,7 +860,7 @@
               <div class="swiper-slide">
                 <div class="tour-box th-ani gsap-cursor">
                   <div class="tour-box_img global-img">
-                    <img src="static/img/tour/tour_box_2.jpg" alt="image" />
+                    <img src="{{ url_for('static', filename='img/tour/tour_box_2.jpg') }}" alt="image" />
                   </div>
                   <div class="tour-content">
                     <h3 class="box-title">
@@ -899,7 +899,7 @@
               <div class="swiper-slide">
                 <div class="tour-box th-ani gsap-cursor">
                   <div class="tour-box_img global-img">
-                    <img src="static/img/tour/tour_box_3.jpg" alt="image" />
+                    <img src="{{ url_for('static', filename='img/tour/tour_box_3.jpg') }}" alt="image" />
                   </div>
                   <div class="tour-content">
                     <h3 class="box-title">
@@ -938,7 +938,7 @@
               <div class="swiper-slide">
                 <div class="tour-box th-ani gsap-cursor">
                   <div class="tour-box_img global-img">
-                    <img src="static/img/tour/tour_box_4.jpg" alt="image" />
+                    <img src="{{ url_for('static', filename='img/tour/tour_box_4.jpg') }}" alt="image" />
                   </div>
                   <div class="tour-content">
                     <h3 class="box-title">
@@ -977,7 +977,7 @@
               <div class="swiper-slide">
                 <div class="tour-box th-ani gsap-cursor">
                   <div class="tour-box_img global-img">
-                    <img src="static/img/tour/tour_box_1.jpg" alt="image" />
+                    <img src="{{ url_for('static', filename='img/tour/tour_box_1.jpg') }}" alt="image" />
                   </div>
                   <div class="tour-content">
                     <h3 class="box-title">
@@ -1016,7 +1016,7 @@
               <div class="swiper-slide">
                 <div class="tour-box th-ani gsap-cursor">
                   <div class="tour-box_img global-img">
-                    <img src="static/img/tour/tour_box_2.jpg" alt="image" />
+                    <img src="{{ url_for('static', filename='img/tour/tour_box_2.jpg') }}" alt="image" />
                   </div>
                   <div class="tour-content">
                     <h3 class="box-title">
@@ -1067,12 +1067,12 @@
           <div class="col-md-6 col-lg-2">
             <div class="gallery-card">
               <div class="box-img global-img">
-                <a href="static/img/gallery/gallery_1_1.jpg" class="popup-image"
+                <a href="{{ url_for('static', filename='img/gallery/gallery_1_1.jpg') }}" class="popup-image"
                   ><div class="icon-btn">
                     <i class="fal fa-magnifying-glass-plus"></i>
                   </div>
                   <img
-                    src="static/img/gallery/gallery_1_1.jpg"
+                    src="{{ url_for('static', filename='img/gallery/gallery_1_2.jpg') }}"
                     alt="gallery image"
                 /></a>
               </div>
@@ -1081,38 +1081,24 @@
           <div class="col-md-6 col-lg-2">
             <div class="gallery-card">
               <div class="box-img global-img">
-                <a href="static/img/gallery/gallery_1_2.jpg" class="popup-image"
+                <a href="{{ url_for('static', filename='img/gallery/gallery_1_2.jpg') }}" class="popup-image"
                   ><div class="icon-btn">
                     <i class="fal fa-magnifying-glass-plus"></i>
                   </div>
                   <img
-                    src="static/img/gallery/gallery_1_2.jpg"
+                    src="{{ url_for('static', filename='img/gallery/gallery_1_2.jpg') }}"
                     alt="gallery image"
                 /></a>
               </div>
             </div>
             <div class="gallery-card">
               <div class="box-img global-img">
-                <a href="static/img/gallery/gallery_1_3.jpg" class="popup-image"
+                <a href="{{ url_for('static', filename='img/gallery/gallery_1_3.jpg') }}" class="popup-image"
                   ><div class="icon-btn">
                     <i class="fal fa-magnifying-glass-plus"></i>
                   </div>
                   <img
-                    src="static/img/gallery/gallery_1_3.jpg"
-                    alt="gallery image"
-                /></a>
-              </div>
-            </div>
-          </div>
-          <div class="col-md-6 col-lg-2">
-            <div class="gallery-card">
-              <div class="box-img global-img">
-                <a href="static/img/gallery/gallery_1_4.jpg" class="popup-image"
-                  ><div class="icon-btn">
-                    <i class="fal fa-magnifying-glass-plus"></i>
-                  </div>
-                  <img
-                    src="static/img/gallery/gallery_1_4.jpg"
+                    src="{{ url_for('static', filename='img/gallery/gallery_1_3.jpg') }}"
                     alt="gallery image"
                 /></a>
               </div>
@@ -1121,24 +1107,12 @@
           <div class="col-md-6 col-lg-2">
             <div class="gallery-card">
               <div class="box-img global-img">
-                <a href="static/img/gallery/gallery_1_5.jpg" class="popup-image"
+                <a href="{{ url_for('static', filename='img/gallery/gallery_1_4.jpg') }}" class="popup-image"
                   ><div class="icon-btn">
                     <i class="fal fa-magnifying-glass-plus"></i>
                   </div>
                   <img
-                    src="static/img/gallery/gallery_1_5.jpg"
-                    alt="gallery image"
-                /></a>
-              </div>
-            </div>
-            <div class="gallery-card">
-              <div class="box-img global-img">
-                <a href="static/img/gallery/gallery_1_6.jpg" class="popup-image"
-                  ><div class="icon-btn">
-                    <i class="fal fa-magnifying-glass-plus"></i>
-                  </div>
-                  <img
-                    src="static/img/gallery/gallery_1_6.jpg"
+                    src="{{ url_for('static', filename='img/gallery/gallery_1_4.jpg') }}"
                     alt="gallery image"
                 /></a>
               </div>
@@ -1147,12 +1121,38 @@
           <div class="col-md-6 col-lg-2">
             <div class="gallery-card">
               <div class="box-img global-img">
-                <a href="static/img/gallery/gallery_1_7.jpg" class="popup-image"
+                <a href="{{ url_for('static', filename='img/gallery/gallery_1_5.jpg') }}" class="popup-image"
                   ><div class="icon-btn">
                     <i class="fal fa-magnifying-glass-plus"></i>
                   </div>
                   <img
-                    src="static/img/gallery/gallery_1_7.jpg"
+                    src="{{ url_for('static', filename='img/gallery/gallery_1_5.jpg') }}"
+                    alt="gallery image"
+                /></a>
+              </div>
+            </div>
+            <div class="gallery-card">
+              <div class="box-img global-img">
+                <a href="{{ url_for('static', filename='img/gallery/gallery_1_6.jpg') }}" class="popup-image"
+                  ><div class="icon-btn">
+                    <i class="fal fa-magnifying-glass-plus"></i>
+                  </div>
+                  <img
+                    src="{{ url_for('static', filename='img/gallery/gallery_1_6.jpg') }}"
+                    alt="gallery image"
+                /></a>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-6 col-lg-2">
+            <div class="gallery-card">
+              <div class="box-img global-img">
+                <a href="{{ url_for('static', filename='img/gallery/gallery_1_7.jpg') }}" class="popup-image"
+                  ><div class="icon-btn">
+                    <i class="fal fa-magnifying-glass-plus"></i>
+                  </div>
+                  <img
+                    src="{{ url_for('static', filename='img/gallery/gallery_1_7.jpg') }}"
                     alt="gallery image"
                 /></a>
               </div>
@@ -1165,14 +1165,14 @@
         data-top="-25%"
         data-left="0%"
       >
-        <img src="static/img/shape/line.png" alt="shape" />
+        <img src="{{ url_for('static', filename='img/shape/line.png') }}" alt="shape" />
       </div>
       <div
         class="shape-mockup movingX d-none d-xl-block"
         data-top="30%"
         data-left="3%"
       >
-        <img class="gmovingX" src="static/img/shape/shape_4.png" alt="shape" />
+        <img class="gmovingX" src="{{ url_for('static', filename='img/shape/shape_4.png') }}" alt="shape" />
       </div>
     </div>
     <div class="counter-area space">
@@ -1229,38 +1229,38 @@
         data-top="30%"
         data-left="2%"
       >
-        <img src="static/img/shape/shape_1.png" alt="shape" />
+        <img src="{{ url_for('static', filename='img/shape/shape_1.png') }}" alt="shape" />
       </div>
       <div
         class="shape-mockup shape2 d-none d-xl-block"
         data-top="45%"
         data-left="2%"
       >
-        <img src="static/img/shape/shape_2.png" alt="shape" />
+        <img src="{{ url_for('static', filename='img/shape/shape_2.png') }}" alt="shape" />
       </div>
       <div
         class="shape-mockup shape3 d-none d-xl-block"
         data-top="32%"
         data-left="7%"
       >
-        <img src="static/img/shape/shape_3.png" alt="shape" />
+        <img src="{{ url_for('static', filename='img/shape/shape_3.png') }}" alt="shape" />
       </div>
       <div
         class="shape-mockup d-none d-xl-block"
         data-bottom="0%"
         data-left="3%"
       >
-        <img src="static/img/shape/shape_6.png" alt="shape" />
+        <img src="{{ url_for('static', filename='img/shape/shape_6.png') }}" alt="shape" />
       </div>
       <div
         class="shape-mockup jump d-none d-xl-block"
         data-top="5%"
         data-right="5%"
       >
-        <img src="static/img/shape/shape_5.png" alt="shape" />
+        <img src="{{ url_for('static', filename='img/shape/shape_5.png') }}" alt="shape" />
       </div>
     </div>
-    <section class="bg-smoke space" data-bg-src="static/img/bg/team_bg_1.png">
+    <section class="bg-smoke space" data-bg-src="{{ url_for('static', filename='img/bg/team_bg_1.png') }}">
       <div class="container z-index-common">
         <div class="title-area text-center">
           <span class="sub-title">Meet with Guide</span>
@@ -1276,7 +1276,7 @@
               <div class="swiper-slide">
                 <div class="th-team team-box">
                   <div class="team-img">
-                    <img src="static/img/team/team_1_1.jpg" alt="Team" />
+                    <img src="{{ url_for('static', filename='img/team/team_1_1.jpg') }}" alt="Team" />
                   </div>
                   <div class="team-content">
                     <div class="media-body">
@@ -1305,7 +1305,7 @@
               <div class="swiper-slide">
                 <div class="th-team team-box">
                   <div class="team-img">
-                    <img src="static/img/team/team_1_2.jpg" alt="Team" />
+                    <img src="{{ url_for('static', filename='img/team/team_1_2.jpg') }}" alt="Team" />
                   </div>
                   <div class="team-content">
                     <div class="media-body">
@@ -1334,7 +1334,7 @@
               <div class="swiper-slide">
                 <div class="th-team team-box">
                   <div class="team-img">
-                    <img src="static/img/team/team_1_3.jpg" alt="Team" />
+                    <img src="{{ url_for('static', filename='img/team/team_1_3.jpg') }}" alt="Team" />
                   </div>
                   <div class="team-content">
                     <div class="media-body">
@@ -1363,7 +1363,7 @@
               <div class="swiper-slide">
                 <div class="th-team team-box">
                   <div class="team-img">
-                    <img src="static/img/team/team_1_4.jpg" alt="Team" />
+                    <img src"{{ url_for('static', filename='img/team/team_1_4.jpg') }}" alt="Team" />
                   </div>
                   <div class="team-content">
                     <div class="media-body">
@@ -1392,7 +1392,7 @@
               <div class="swiper-slide">
                 <div class="th-team team-box">
                   <div class="team-img">
-                    <img src="static/img/team/team_1_1.jpg" alt="Team" />
+                    <img src="{{ url_for('static', filename='img/team/team_1_1.jpg') }}" alt="Team" />
                   </div>
                   <div class="team-content">
                     <div class="media-body">
@@ -1421,7 +1421,7 @@
               <div class="swiper-slide">
                 <div class="th-team team-box">
                   <div class="team-img">
-                    <img src="static/img/team/team_1_2.jpg" alt="Team" />
+                    <img src="{{ url_for('static', filename='img/team/team_1_2.jpg') }}" alt="Team" />
                   </div>
                   <div class="team-content">
                     <div class="media-body">
@@ -1450,7 +1450,7 @@
               <div class="swiper-slide">
                 <div class="th-team team-box">
                   <div class="team-img">
-                    <img src="static/img/team/team_1_3.jpg" alt="Team" />
+                    <img src="{{ url_for('static', filename='img/team/team_1_3.jpg') }}" alt="Team" />
                   </div>
                   <div class="team-content">
                     <div class="media-body">
@@ -1479,7 +1479,7 @@
               <div class="swiper-slide">
                 <div class="th-team team-box">
                   <div class="team-img">
-                    <img src="static/img/team/team_1_4.jpg" alt="Team" />
+                    <img src="{{ url_for('static', filename='img/team/team_1_4.jpg') }}" alt="Team" />
                   </div>
                   <div class="team-content">
                     <div class="media-body">
@@ -1530,7 +1530,7 @@
                     <div class="testi-card_profile">
                       <div class="testi-card_avater">
                         <img
-                          src="static/img/testimonial/testi_1_1.jpg"
+                          src="{{ url_for('static', filename='img/testimonial/testi_1_1.jpg') }}"
                           alt="testimonial"
                         />
                       </div>
@@ -1554,7 +1554,7 @@
                     live. The commitment to eco-friendly living”
                   </p>
                   <div class="testi-card-quote">
-                    <img src="static/img/icon/testi-quote.svg" alt="img" />
+                    <img src="{{ url_for('static', filename='img/icon/testi-quote.svg') }}" alt="img" />
                   </div>
                 </div>
               </div>
@@ -1564,7 +1564,7 @@
                     <div class="testi-card_profile">
                       <div class="testi-card_avater">
                         <img
-                          src="static/img/testimonial/testi_1_2.jpg"
+                          src="{{ url_for('static', filename='img/testimonial/testi_1_2.jpg') }}"
                           alt="testimonial"
                         />
                       </div>
@@ -1587,7 +1587,7 @@
                     the interiors It incorporates passive design principles”
                   </p>
                   <div class="testi-card-quote">
-                    <img src="static/img/icon/testi-quote.svg" alt="img" />
+                    <img src="{{ url_for('static', filename='img/icon/testi-quote.svg') }}" alt="img" />
                   </div>
                 </div>
               </div>
@@ -1597,7 +1597,7 @@
                     <div class="testi-card_profile">
                       <div class="testi-card_avater">
                         <img
-                          src="static/img/testimonial/testi_1_1.jpg"
+                          src="{{ url_for('static', filename='img/testimonial/testi_1_1.jpg') }}"
                           alt="testimonial"
                         />
                       </div>
@@ -1620,7 +1620,7 @@
                     the grid. High-performance insulation and triple-glazed”
                   </p>
                   <div class="testi-card-quote">
-                    <img src="static/img/icon/testi-quote.svg" alt="img" />
+                    <img src="{{ url_for('static', filename='img/icon/testi-quote.svg') }}" alt="img" />
                   </div>
                 </div>
               </div>
@@ -1630,7 +1630,7 @@
                     <div class="testi-card_profile">
                       <div class="testi-card_avater">
                         <img
-                          src="static/img/testimonial/testi_1_2.jpg"
+                          src="{{ url_for('static', filename='img/testimonial/testi_1_2.jpg') }}"
                           alt="testimonial"
                         />
                       </div>
@@ -1654,7 +1654,7 @@
                     systems
                   </p>
                   <div class="testi-card-quote">
-                    <img src="static/img/icon/testi-quote.svg" alt="img" />
+                    <img src="{{ url_for('static', filename='img/icon/testi-quote.svg') }}" alt="img" />
                   </div>
                 </div>
               </div>
@@ -1664,7 +1664,7 @@
                     <div class="testi-card_profile">
                       <div class="testi-card_avater">
                         <img
-                          src="static/img/testimonial/testi_1_1.jpg"
+                          src="{{ url_for('static', filename='img/testimonial/testi_1_1.jpg') }}"
                           alt="testimonial"
                         />
                       </div>
@@ -1687,7 +1687,7 @@
                     countertops create a luxurious yet sustainable ambiance.
                   </p>
                   <div class="testi-card-quote">
-                    <img src="static/img/icon/testi-quote.svg" alt="img" />
+                    <img src="{{ url_for('static', filename='img/icon/testi-quote.svg') }}" alt="img" />
                   </div>
                 </div>
               </div>
@@ -1697,7 +1697,7 @@
                     <div class="testi-card_profile">
                       <div class="testi-card_avater">
                         <img
-                          src="static/img/testimonial/testi_1_1.jpg"
+                          src="{{ url_for('static', filename='img/testimonial/testi_1_1.jpg') }}"
                           alt="testimonial"
                         />
                       </div>
@@ -1721,7 +1721,7 @@
                     live. The commitment to eco-friendly living”
                   </p>
                   <div class="testi-card-quote">
-                    <img src="static/img/icon/testi-quote.svg" alt="img" />
+                    <img src="{{ url_for('static', filename='img/icon/testi-quote.svg') }}" alt="img" />
                   </div>
                 </div>
               </div>
@@ -1731,7 +1731,7 @@
                     <div class="testi-card_profile">
                       <div class="testi-card_avater">
                         <img
-                          src="static/img/testimonial/testi_1_2.jpg"
+                          src="{{ url_for('static', filename='img/testimonial/testi_1_2.jpg') }}"
                           alt="testimonial"
                         />
                       </div>
@@ -1755,7 +1755,7 @@
                     systems
                   </p>
                   <div class="testi-card-quote">
-                    <img src="static/img/icon/testi-quote.svg" alt="img" />
+                    <img src="{{ url_for('static', filename='img/icon/testi-quote.svg') }}" alt="img" />
                   </div>
                 </div>
               </div>
@@ -1765,7 +1765,7 @@
                     <div class="testi-card_profile">
                       <div class="testi-card_avater">
                         <img
-                          src="static/img/testimonial/testi_1_1.jpg"
+                          src="{{ url_for('static', filename='img/testimonial/testi_1_1.jpg') }}"
                           alt="testimonial"
                         />
                       </div>
@@ -1788,7 +1788,7 @@
                     countertops create a luxurious yet sustainable ambiance.
                   </p>
                   <div class="testi-card-quote">
-                    <img src="static/img/icon/testi-quote.svg" alt="img" />
+                    <img src= "{{ url_for('static', filename='img/icon/testi-quote.svg') }}" alt="img" />
                   </div>
                 </div>
               </div>
@@ -1802,14 +1802,14 @@
         data-bottom="-2%"
         data-right="0%"
       >
-        <img src="static/img/shape/line2.png" alt="shape" />
+        <img src="{{ url_for('static', filename='img/shape/line2.png') }}" alt="shape" />
       </div>
       <div
         class="shape-mockup movingX d-none d-xl-block"
         data-top="30%"
         data-left="5%"
       >
-        <img src="static/img/shape/shape_7.png" alt="shape" />
+        <img src="{{ url_for('static', filename='img/shape/shape_7.png') }}" alt="shape" />
       </div>
     </section>
     <div class="brand-area overflow-hidden space-bottom">
@@ -1825,11 +1825,11 @@
                 <a href="#"
                   ><img
                     class="original"
-                    src="static/img/brand/brand_1_1.svg"
+                    src="{{ url_for('static', filename='img/brand/brand_1_1.svg') }}"   
                     alt="Brand Logo" />
                   <img
                     class="gray"
-                    src="static/img/brand/brand_1_1.svg"
+                    src="{{ url_for('static', filename='img/brand/brand_1_1.svg') }}"
                     alt="Brand Logo"
                 /></a>
               </div>
@@ -1839,11 +1839,11 @@
                 <a href="#"
                   ><img
                     class="original"
-                    src="static/img/brand/brand_1_2.svg"
+                    src="{{ url_for('static', filename='img/brand/brand_1_2.svg') }}"
                     alt="Brand Logo" />
                   <img
                     class="gray"
-                    src="static/img/brand/brand_1_2.svg"
+                    src="{{ url_for('static', filename='img/brand/brand_1_2.svg') }}"
                     alt="Brand Logo"
                 /></a>
               </div>
@@ -1853,11 +1853,11 @@
                 <a href="#"
                   ><img
                     class="original"
-                    src="static/img/brand/brand_1_3.svg"
+                    src="{{ url_for('static', filename='img/brand/brand_1_3.svg') }}"  
                     alt="Brand Logo" />
                   <img
                     class="gray"
-                    src="static/img/brand/brand_1_3.svg"
+                    src="{{ url_for('static', filename='img/brand/brand_1_3.svg') }}"
                     alt="Brand Logo"
                 /></a>
               </div>
@@ -1867,11 +1867,11 @@
                 <a href="#"
                   ><img
                     class="original"
-                    src="static/img/brand/brand_1_4.svg"
+                    src="{{ url_for('static', filename='img/brand/brand_1_4.svg') }}"
                     alt="Brand Logo" />
                   <img
                     class="gray"
-                    src="static/img/brand/brand_1_4.svg"
+                    src="{{ url_for('static', filename='img/brand/brand_1_4.svg') }}"
                     alt="Brand Logo"
                 /></a>
               </div>
@@ -1881,11 +1881,11 @@
                 <a href="#"
                   ><img
                     class="original"
-                    src="static/img/brand/brand_1_5.svg"
+                    src="{{ url_for('static', filename='img/brand/brand_1_5.svg') }}"
                     alt="Brand Logo" />
                   <img
                     class="gray"
-                    src="static/img/brand/brand_1_5.svg"
+                    src="{{ url_for('static', filename='img/brand/brand_1_5.svg') }}"
                     alt="Brand Logo"
                 /></a>
               </div>
@@ -1895,11 +1895,11 @@
                 <a href="#"
                   ><img
                     class="original"
-                    src="static/img/brand/brand_1_6.svg"
+                    src="{{ url_for('static', filename='img/brand/brand_1_6.svg') }}"
                     alt="Brand Logo" />
                   <img
                     class="gray"
-                    src="static/img/brand/brand_1_6.svg"
+                    src="{{ url_for('static', filename='img/brand/brand_1_6.svg') }}"
                     alt="Brand Logo"
                 /></a>
               </div>
@@ -1909,11 +1909,11 @@
                 <a href="#"
                   ><img
                     class="original"
-                    src="static/img/brand/brand_1_7.svg"
+                    src="{{ url_for('static', filename='img/brand/brand_1_7.svg') }}"
                     alt="Brand Logo" />
                   <img
                     class="gray"
-                    src="static/img/brand/brand_1_7.svg"
+                    src="{{ url_for('static', filename='img/brand/brand_1_7.svg') }}"
                     alt="Brand Logo"
                 /></a>
               </div>
@@ -1923,11 +1923,11 @@
                 <a href="#"
                   ><img
                     class="original"
-                    src="static/img/brand/brand_1_8.svg"
+                    src="{{ url_for('static', filename='img/brand/brand_1_8.svg') }}"
                     alt="Brand Logo" />
                   <img
                     class="gray"
-                    src="static/img/brand/brand_1_8.svg"
+                    src="{{ url_for('static', filename='img/brand/brand_1_8.svg') }}"
                     alt="Brand Logo"
                 /></a>
               </div>
@@ -1937,11 +1937,11 @@
                 <a href="#"
                   ><img
                     class="original"
-                    src="static/img/brand/brand_1_4.svg"
+                    src="{{ url_for('static', filename='img/brand/brand_1_4.svg') }}"
                     alt="Brand Logo" />
                   <img
                     class="gray"
-                    src="static/img/brand/brand_1_4.svg"
+                    src="{{ url_for('static', filename='img/brand/brand_1_4.svg') }}"
                     alt="Brand Logo"
                 /></a>
               </div>
@@ -1951,11 +1951,11 @@
                 <a href="#"
                   ><img
                     class="original"
-                    src="static/img/brand/brand_1_3.svg"
+                    src="{{ url_for('static', filename='img/brand/brand_1_3.svg') }}"
                     alt="Brand Logo" />
                   <img
                     class="gray"
-                    src="static/img/brand/brand_1_3.svg"
+                    src="{{ url_for('static', filename='img/brand/brand_1_3.svg') }}"
                     alt="Brand Logo"
                 /></a>
               </div>
@@ -1965,11 +1965,11 @@
                 <a href="#"
                   ><img
                     class="original"
-                    src="static/img/brand/brand_1_2.svg"
+                    src="{{ url_for('static', filename='img/brand/brand_1_2.svg') }}"
                     alt="Brand Logo" />
                   <img
                     class="gray"
-                    src="static/img/brand/brand_1_2.svg"
+                    src="{{ url_for('static', filename='img/brand/brand_1_2.svg') }}"
                     alt="Brand Logo"
                 /></a>
               </div>
@@ -1979,11 +1979,11 @@
                 <a href="#"
                   ><img
                     class="original"
-                    src="static/img/brand/brand_1_1.svg"
+                    src="{{ url_for('static', filename='img/brand/brand_1_1.svg') }}"
                     alt="Brand Logo" />
                   <img
                     class="gray"
-                    src="static/img/brand/brand_1_1.svg"
+                    src="{{ url_for('static', filename='img/brand/brand_1_1.svg') }}"
                     alt="Brand Logo"
                 /></a>
               </div>
@@ -2019,7 +2019,7 @@
               <div class="swiper-slide">
                 <div class="blog-box th-ani">
                   <div class="blog-img global-img">
-                    <img src="static/img/blog/blog_1_1.jpg" alt="blog image" />
+                    <img src="{{ url_for('static', filename='img/blog/blog_1_1.jpg') }}" alt="blog image" />
                   </div>
                   <div class="blog-box_content">
                     <div class="blog-meta">
@@ -2040,7 +2040,7 @@
               <div class="swiper-slide">
                 <div class="blog-box th-ani">
                   <div class="blog-img global-img">
-                    <img src="static/img/blog/blog_1_2.jpg" alt="blog image" />
+                    <img src="{{ url_for('static', filename='img/blog/blog_1_2.jpg') }}" alt="blog image" />
                   </div>
                   <div class="blog-box_content">
                     <div class="blog-meta">
@@ -2062,7 +2062,7 @@
               <div class="swiper-slide">
                 <div class="blog-box th-ani">
                   <div class="blog-img global-img">
-                    <img src="static/img/blog/blog_1_3.jpg" alt="blog image" />
+                    <img src="{{ url_for('static', filename='img/blog/blog_1_3.jpg') }}" alt="blog image" />
                   </div>
                   <div class="blog-box_content">
                     <div class="blog-meta">
@@ -2126,7 +2126,7 @@
               <div class="swiper-slide">
                 <div class="blog-box th-ani">
                   <div class="blog-img global-img">
-                    <img src="static/img/blog/blog_1_3.jpg" alt="blog image" />
+                    <img src="{{ url_for('static', filename='img/blog/blog_1_3.jpg') }}" alt="blog image" />
                   </div>
                   <div class="blog-box_content">
                     <div class="blog-meta">
@@ -2153,21 +2153,21 @@
         data-bottom="20%"
         data-left="2%"
       >
-        <img src="static/img/shape/shape_1.png" alt="shape" />
+        <img src="{{ url_for('static', filename='img/shape/shape_1.png') }}" alt="shape" />
       </div>
       <div
         class="shape-mockup shape2 d-none d-xl-block"
         data-bottom="5%"
         data-left="2%"
       >
-        <img src="static/img/shape/shape_2.png" alt="shape" />
+        <img src="{{ url_for('static', filename='img/shape/shape_2.png') }}" alt="shape" />
       </div>
       <div
         class="shape-mockup shape3 d-none d-xxl-block"
         data-bottom="12%"
         data-left="7%"
       >
-        <img src="static/img/shape/shape_3.png" alt="shape" />
+        <img src="{{ url_for('static', filename='img/shape/shape_3.png') }}" alt="shape" />
       </div>
     </section>
    
