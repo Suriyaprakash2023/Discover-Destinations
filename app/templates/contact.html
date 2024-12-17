@@ -1,8 +1,8 @@
 {% extends 'base.html' %}
 
 {% block content %}
-{% include 'header.html' %}
-<div class="breadcumb-wrapper" data-bg-src="static/img/bg/breadcumb-bg.jpg">
+{% include 'header.html' %} 
+<div class="breadcumb-wrapper" data-bg-src="{{ url_for('static', filename='img/bg/breadcumb-bg.jpg') }}">
   <div class="container">
     <div class="breadcumb-content">
       <h1 class="breadcumb-title">Contact Us</h1>
@@ -22,8 +22,8 @@
     <div class="row gy-4 justify-content-center">
       <div class="col-xl-4 col-lg-6">
         <div class="about-contact-grid style2">
-          <div class="about-contact-icon">
-            <img src="static/img/icon/location-dot2.svg" alt="" />
+          <div class="about-contact-icon">  
+            <img src="{{ url_for('static', filename='img/icon/location-dot2.svg') }}" alt="" />
           </div>
           <div class="about-contact-details">
             <h6 class="box-title">Our Address</h6>
@@ -37,7 +37,7 @@
       <div class="col-xl-4 col-lg-6">
         <div class="about-contact-grid">
           <div class="about-contact-icon">
-            <img src="static/img/icon/call.svg" alt="" />
+            <img src="{{ url_for('static', filename='img/icon/call.svg') }}" alt="" />  
           </div>
           <div class="about-contact-details">
             <h6 class="box-title">Phone Number</h6>
@@ -52,8 +52,8 @@
       </div>
       <div class="col-xl-4 col-lg-6">
         <div class="about-contact-grid">
-          <div class="about-contact-icon">
-            <img src="static/img/icon/mail.svg" alt="" />
+          <div class="about-contact-icon"> 
+            <img src="{{ url_for('static', filename='img/icon/mail.svg') }}" alt="" />
           </div>
           <div class="about-contact-details">
             <h6 class="box-title">Email Address</h6>
@@ -71,7 +71,7 @@
 </div>
 <div
   class="space-extra2-top space-extra2-bottom"
-  data-bg-src="static/img/bg/video_bg_1.jpg"
+  data-bg-src="{{ url_for('static', filename='img/bg/video_bg_1.jpg') }}" 
 >
   <div class="container">
     <div
@@ -89,7 +89,7 @@
       <div class="col-lg-6">
         <div>
           <form
-            action="mail.php"
+            action=""
             method="POST"
             class="contact-form style2 ajax-contact"
           >
@@ -102,8 +102,8 @@
                   name="name"
                   id="name3"
                   placeholder="First Name"
-                />
-                <img src="static/img/icon/user.svg" alt="" />
+                /> 
+                <img src="{{ url_for('static', filename='img/icon/user.svg') }}" alt="" />
               </div>
               <div class="col-12 form-group">
                 <input
@@ -113,7 +113,7 @@
                   id="email3"
                   placeholder="Your Mail"
                 />
-                <img src="static/img/icon/mail.svg" alt="" />
+                <img src="{{ url_for('static', filename='img/icon/mail.svg') }}" alt="" />
               </div>
               <div class="form-group col-12">
                 <select
@@ -143,12 +143,12 @@
                   class="form-control"
                   placeholder="Your Message"
                 ></textarea>
-                <img src="static/img/icon/chat.svg" alt="" />
+                <img src="{{ url_for('static', filename='img/icon/chat.svg') }}" alt="" />
               </div>
               <div class="form-btn col-12 mt-24">
                 <button type="submit" class="th-btn style3">
                   Send message
-                  <img src="static/img/icon/plane.svg" alt="" />
+                  <img src="{{ url_for('static', filename='img/icon/plane.svg') }}" alt="" />
                 </button>
               </div>
             </div>
@@ -167,8 +167,8 @@
         allowfullscreen=""
         loading="lazy"
       ></iframe>
-      <div class="contact-icon">
-        <img src="static/img/icon/location-dot3.svg" alt="" />
+      <div class="contact-icon"> 
+        <img src="{{ url_for('static', filename='img/icon/location-dot3.svg') }}" alt="" />
       </div>
     </div>
   </div>
