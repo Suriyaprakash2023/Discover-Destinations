@@ -1,4 +1,4 @@
-from flask import Blueprint, render_template,jsonify, request, redirect, url_for, flash, session,current_app
+from flask import Blueprint, render_template,jsonify, request, redirect, url_for, flash, session,current_app,send_from_directory
 from .models import *
 from werkzeug.security import generate_password_hash
 from flask_login import LoginManager, login_user, logout_user, login_required, current_user
@@ -8,6 +8,14 @@ import uuid
 from datetime import datetime, timedelta
 
 main = Blueprint('main', __name__)
+
+
+
+@main.route('/static/<path:filename>')
+def static_files(filename):
+    return send_from_directory('static', filename)
+
+
 
 @main.route('/')
 def index():
