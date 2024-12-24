@@ -8,19 +8,20 @@ import os
 migrate = Migrate()
 
 def create_app():
-    app = Flask(__name__)
 
-    app = Flask(__name__, static_folder='static')  # Add static_folder config here
+    app = Flask(__name__, static_folder='static', static_url_path='/static')
     
     # Load configuration
-    app.register_blueprint(main) 
-    app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///discover_destinations.db'  # Use a proper config for production
+    app.register_blueprint(main)
+    app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///discover_destinations.db'
     app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
     app.config['SECRET_KEY'] = 'supersecretkey12345'
     app.config['MAX_CONTENT_LENGTH'] = 500 * 1024 * 1024  # 500 MB
 
-    # Configuring upload folder
-    app.config['UPLOAD_FOLDER'] = os.path.join(os.getcwd(), 'static/images')
+    # Better path handling for upload folder
+    CURRENT_DIR = os.path.dirname(os.path.abspath(__file__))
+    app.config['UPLOAD_FOLDER'] = os.path.join(CURRENT_DIR, 'static/images')
+    os.makedirs(app.config['UPLOAD_FOLDER'], exist_ok=True)
 
 
 
