@@ -1,7 +1,9 @@
 from app import create_app, db
+from flask import Flask,jsonify
 from flask_login import LoginManager
 from app.models import User
 app = create_app()
+# app = Flask(__name__, static_folder='static')
 
 # Initialize the LoginManager
 login_manager = LoginManager()
@@ -13,4 +15,4 @@ def load_user(user_id):
     return User.query.get(int(user_id))  # Query the user by ID
 
 if __name__ == '__main__':
-    app.run(host="0.0.0.0",port=5000,debug=True)  # Start the app
+    app.run(debug=True)  # Start the app

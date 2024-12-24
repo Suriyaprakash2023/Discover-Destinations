@@ -10,6 +10,8 @@ migrate = Migrate()
 def create_app():
     app = Flask(__name__)
 
+    app = Flask(__name__, static_folder='static')  # Add static_folder config here
+    
     # Load configuration
     app.register_blueprint(main) 
     app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///discover_destinations.db'  # Use a proper config for production
