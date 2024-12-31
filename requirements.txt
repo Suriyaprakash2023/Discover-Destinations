@@ -2,7 +2,7 @@ alembic==1.14.0
 aniso8601==9.0.1
 bcrypt==4.2.1
 blinker==1.9.0
-
+gunicorn==23.0.0
 Flask==3.1.0
 Flask-Bcrypt==1.0.1
 Flask-SQLAlchemy==3.1.1
