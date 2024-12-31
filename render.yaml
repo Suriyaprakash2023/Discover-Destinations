@@ -1,0 +1,3 @@
+static:
+  - path: /static
+    source: app/static
