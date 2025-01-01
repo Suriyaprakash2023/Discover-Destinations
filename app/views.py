@@ -10,19 +10,12 @@ from datetime import datetime, timedelta
 main = Blueprint('main', __name__)
 
 
-#old code
-# @main.route('/static/<path:filename>')
-# def static_files(filename):
-#     return send_from_directory('static', filename)
+
+@main.route('/static/<path:filename>')
+def static_files(filename):
+    return send_from_directory('static', filename)
 
 
-@main.route('/static/img/<path:filename>')
-def serve_image(filename):
-    static_dir = os.path.join(current_app.root_path, 'static')
-    full_path = os.path.join(static_dir, 'img', filename)
-    main.logger.debug(f"Attempting to serve: {full_path}")
-    main.logger.debug(f"File exists: {os.path.exists(full_path)}")
-    return send_from_directory(static_dir, os.path.join('img', filename))
 
 @main.route('/')
 def index():

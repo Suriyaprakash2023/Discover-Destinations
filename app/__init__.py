@@ -19,12 +19,9 @@ def create_app():
     app.config['SECRET_KEY'] = 'supersecretkey12345'
     app.config['MAX_CONTENT_LENGTH'] = 500 * 1024 * 1024  # 500 MB
 
-   
-    # Configure upload folder with absolute path
-    base_dir = os.path.abspath(os.path.dirname(__file__))
-    app.config['UPLOAD_FOLDER'] = os.path.join(base_dir, 'static', 'images')
-    
-    # Ensure upload directory exists
+    # Better path handling for upload folder
+    CURRENT_DIR = os.path.dirname(os.path.abspath(__file__))
+    app.config['UPLOAD_FOLDER'] = os.path.join(CURRENT_DIR, 'static/images')
     os.makedirs(app.config['UPLOAD_FOLDER'], exist_ok=True)
 
 
